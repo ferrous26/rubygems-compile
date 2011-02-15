@@ -9,23 +9,6 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "rubygems-compile"
-  gem.homepage = "http://github.com/ferrous26/rubygems-compile"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "mrada@marketcircle.com"
-  gem.authors = ["Mark Rada"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
-end
-Jeweler::RubygemsDotOrgTasks.new
-
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
@@ -33,14 +16,45 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
+# require 'rcov/rcovtask'
+# Rcov::RcovTask.new do |test|
+#   test.libs << 'test'
+#   test.pattern = 'test/**/test_*.rb'
+#   test.verbose = true
+# end
 
 task :default => :test
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+namespace :macruby do
+  desc 'AOT compile'
+  task :compile do
+    FileList["lib/**/*.rb"].each do |source|
+      name = File.basename source
+      puts "#{name} => #{name}o"
+      `macrubyc --arch x86_64 -C '#{source}' -o '#{source}o'`
+    end
+  end
+
+  desc 'Clean MacRuby binaries'
+  task :clean do
+    FileList["lib/**/*.rbo"].each do |bin|
+      rm bin
+    end
+  end
+end
+
+namespace :gem do
+  desc 'Build the gem'
+  task :build => :'macruby:compile' do
+    puts `gem build -v rubygems-compile.gemspec`
+  end
+
+  desc 'Build the gem and install it'
+  task :install => :build do
+    puts `gem install -v #{Dir.glob('./rubygems-compile*.gem').sort.reverse.first}`
+  end
+end
+
