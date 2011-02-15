@@ -48,7 +48,7 @@ end
 
 namespace :gem do
   desc 'Build the gem'
-  task :build => :'macruby:compile' do
+  task :build do
     puts `gem build -v rubygems-compile.gemspec`
   end
 
