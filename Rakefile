@@ -54,7 +54,7 @@ namespace :gem do
 
   desc 'Build the gem and install it'
   task :install => :build do
-    puts `gem install -v #{Dir.glob('./rubygems-compile*.gem').sort.reverse.first}`
+    puts `gem install #{Dir.glob('rubygems-compile*.gem').sort.reverse.first}`
   end
 end
 
