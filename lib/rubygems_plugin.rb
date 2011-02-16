@@ -8,7 +8,7 @@ Gem.post_install do |gem|
     next unless file.match /\.rb$/
     puts "Compiling #{file} to #{file}o"
     file = "#{dir}/#{file}"
-    `macrubyc --verbose --arch x86_64 -C '#{file}' -o '#{file}o'`
+    `macrubyc -C '#{file}' -o '#{file}o'`
   end
 
 end
