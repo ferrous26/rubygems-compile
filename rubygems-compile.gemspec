@@ -23,7 +23,6 @@ A rubygems post-install hook compile the gem using the MacRuby compiler.
   s.extra_rdoc_files = [ 'LICENSE.txt', 'README.markdown', '.yardopts' ]
 
   s.add_development_dependency 'rake',      ['~> 0.8.7']
-  s.add_development_dependency 'minitest',  ['~> 2.0.2']
   s.add_development_dependency 'yard',      ['~> 0.6.4']
   s.add_development_dependency 'bluecloth', ['~> 2.0.11']
 #  s.add_development_dependency 'rcov',      ['>= 0']
