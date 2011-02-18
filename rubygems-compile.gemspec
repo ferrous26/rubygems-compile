@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
 
   s.required_rubygems_version = '>= 1.4.2'
   s.rubygems_version          = '1.4.2'
