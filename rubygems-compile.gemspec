@@ -19,9 +19,8 @@ A rubygems post-install hook compile the gem using the MacRuby compiler.
   s.require_paths = ['lib']
 
   s.files            = Dir.glob('lib/**/*.rb')
-  s.test_files       = Dir.glob('test/**/*_test.rb') + ['test/helper.rb']
+#  s.test_files       = Dir.glob('test/**/*_test.rb') + ['test/helper.rb']
   s.extra_rdoc_files = [ 'LICENSE.txt', 'README.markdown', '.yardopts' ]
 
   s.add_development_dependency 'rake',      ['~> 0.8.7']
-#  s.add_development_dependency 'rcov',      ['>= 0']
 end
