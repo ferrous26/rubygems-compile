@@ -15,12 +15,12 @@ A rubygems post-install hook compile the gem using the MacRuby compiler.
   s.email         = 'mrada@marketcircle.com'
   s.homepage      = 'http://github.com/ferrous26/rubygems-compile'
   s.licenses      = ['MIT']
-  s.has_rdoc      = 'yard'
+  s.has_rdoc      = true
   s.require_paths = ['lib']
 
   s.files            = Dir.glob('lib/**/*.rb')
 #  s.test_files       = Dir.glob('test/**/*_test.rb') + ['test/helper.rb']
-  s.extra_rdoc_files = [ 'LICENSE.txt', 'README.markdown', '.yardopts' ]
+  s.extra_rdoc_files = [ 'LICENSE.txt', 'README.rdoc' ]
 
   s.add_development_dependency 'rake',      ['~> 0.8.7']
 end

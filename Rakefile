@@ -9,12 +9,12 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
+# require 'rake/testtask'
+# Rake::TestTask.new(:test) do |test|
+#   test.libs << 'lib' << 'test'
+#   test.pattern = 'test/**/test_*.rb'
+#   test.verbose = true
+# end
 
 # require 'rcov/rcovtask'
 # Rcov::RcovTask.new do |test|
@@ -24,9 +24,6 @@ end
 # end
 
 task :default => :test
-
-require 'yard'
-YARD::Rake::YardocTask.new
 
 namespace :macruby do
   desc 'AOT compile'
