@@ -1,5 +1,4 @@
-rubygems-compile
-============
+= rubygems-compile
 
 A post-install hook for `macgem` to automatically compile rubygems
 when you install them.
@@ -11,24 +10,21 @@ All you need to do is:
 And then you're off to the races! When you install gems you should get
 a bunch of output about files being compiled.
 
-Caveats
-=======
+== Caveats
 
 * Large gems will take a long time to compile
 * This has only been tested on a few gems
 * Some gems specifically require a file with the extension, defeating
   the purpose of having a compiled version of the file
 
-TODO
-====
+== TODO
 
-- make the compilation an install option
-- add an option to replace the original file with the compiled version
+* make the compilation an install option
+* add an option to replace the original file with the compiled version
  + I can't remove the original and leave *.rbo files because of how
  rubygems identifies gems unless I modify gemspec files
 
-Contributing to rubygems-compile
-=======================
+== Contributing to rubygems-compile
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -38,8 +34,7 @@ Contributing to rubygems-compile
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-Copyright
-=======
+== Copyright
 
 Copyright (c) 2011 Mark Rada. See LICENSE.txt for
 further details.
