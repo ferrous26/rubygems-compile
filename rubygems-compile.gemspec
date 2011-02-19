@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
 
   s.required_rubygems_version = '>= 1.4.2'
   s.rubygems_version          = '1.4.2'
@@ -12,10 +12,12 @@ Gem::Specification.new do |s|
 A rubygems post-install hook to compile gems using the MacRuby compiler.
   EOS
   s.post_install_message = <<-EOS
+
 ***********************************************************
 Make sure to uninstall earlier versions of rubygems-compile
 or you will end up compiling your gems multiple times.
 ***********************************************************
+
   EOS
   s.authors       = ['Mark Rada']
   s.email         = 'mrada@marketcircle.com'
