@@ -8,7 +8,7 @@ require 'rake'
 #   test.verbose = true
 # end
 
-task :default => :test
+task :default => :'gem:build'
 
 namespace :macruby do
   desc 'AOT compile'
@@ -39,4 +39,3 @@ namespace :gem do
     puts `gem install #{Dir.glob('rubygems-compile*.gem').sort.reverse.first}`
   end
 end
-
