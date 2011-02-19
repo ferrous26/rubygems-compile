@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.4.2'
   s.rubygems_version          = '1.4.2'
 
-  s.summary       = 'A rubygems post-install hook compile the gem'
+  s.summary       = 'A rubygems post-install hook using the MacRuby compiler to compile gems'
   s.description   = <<-EOS
-A rubygems post-install hook compile the gem using the MacRuby compiler.
+A rubygems post-install hook to compile gems using the MacRuby compiler.
   EOS
   s.authors       = ['Mark Rada']
   s.email         = 'mrada@marketcircle.com'
