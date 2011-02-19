@@ -11,6 +11,12 @@ Gem::Specification.new do |s|
   s.description   = <<-EOS
 A rubygems post-install hook to compile gems using the MacRuby compiler.
   EOS
+  s.post_install_message = <<-EOS
+***********************************************************
+Make sure to uninstall earlier versions of rubygems-compile
+or you will end up compiling your gems multiple times.
+***********************************************************
+  EOS
   s.authors       = ['Mark Rada']
   s.email         = 'mrada@marketcircle.com'
   s.homepage      = 'http://github.com/ferrous26/rubygems-compile'
