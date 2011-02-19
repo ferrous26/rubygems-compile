@@ -1,7 +1,6 @@
 = rubygems-compile
 
-A post-install hook for `macgem` to automatically compile rubygems
-when you install them.
+A post-install hook for `macgem` to automatically compile gems when you install them.
 
 All you need to do is:
 
@@ -13,18 +12,18 @@ And then you're off to the races! When you install gems you should get a bunch o
 
 Right now, all you need to do is install the gem and it will be used every time you install a new gem (or reinstall an existing gem).
 
-In the future, there are a few different ways this plugin operate:
+In the future, there are a few different ways this plugin could operate:
 
 * A gemspec property
   * spec.compile_for_macruby = true
 * A gem command
   * gem compile nokogiri
   * gem compile --remove-original-files nokogiri
-    * I can't remove the original .rb files and leave *.rbo files because of how rubygems identifies gems (unless I modify gemspec files)
+    * I can't remove the original *.rb files and leave *.rbo files by default because of how rubygems identifies gems (unless I modify gemspec files)
 * A gem install option
   * gem install --compile nokogiri
 
-I'm not sure which is best, and maybe all of them will get implemented.
+I'm not sure which is best, perhaps all of them will get implemented.
 
 == Caveats
 
@@ -34,6 +33,5 @@ I'm not sure which is best, and maybe all of them will get implemented.
 
 == Copyright
 
-Copyright (c) 2011 Mark Rada. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Mark Rada. See LICENSE.txt for further details.
 
