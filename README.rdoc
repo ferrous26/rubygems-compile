@@ -7,20 +7,30 @@ All you need to do is:
 
      gem install rubygems-compile
 
-And then you're off to the races! When you install gems you should get
-a bunch of output about files being compiled.
+And then you're off to the races! When you install gems you should get a bunch of output about files being compiled.
+
+== TODO
+
+Right now, all you need to do is install the gem and it will be used every time you install a new gem (or reinstall an existing gem).
+
+In the future, there are a few different ways this plugin operate:
+
+* A gemspec property
+  * spec.compile_for_macruby = true
+* A gem command
+  * gem compile nokogiri
+  * gem compile --remove-original-files nokogiri
+    * I can't remove the original .rb files and leave *.rbo files because of how rubygems identifies gems (unless I modify gemspec files)
+* A gem install option
+  * gem install --compile nokogiri
+
+I'm not sure which is best, and maybe all of them will get implemented.
 
 == Caveats
 
 * Large gems will take a long time to compile
-* This has only been tested on a few gems
-* Some gems specifically require a file with the extension, defeating the purpose of having a compiled version of the file
-
-== TODO
-
-* make the compilation an install option
-* add an option to replace the original file with the compiled version
-  * I can't remove the original and leave *.rbo files because of how rubygems identifies gems unless I modify gemspec files
+* This has only been tested on a few gems, but should not break existing gems since we leave the original files around
+* Some gems specifically require a file with the .rb extension, defeating the purpose of having a compiled version of the gem
 
 == Copyright
 
