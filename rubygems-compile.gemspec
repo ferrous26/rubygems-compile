@@ -28,5 +28,5 @@ or you will end up compiling your gems multiple times.
 #  s.test_files       = Dir.glob('test/**/*_test.rb') + ['test/helper.rb']
   s.extra_rdoc_files = [ 'LICENSE.txt', 'README.rdoc' ]
 
-  s.add_development_dependency 'rake',      ['~> 0.8.7']
+  s.add_development_dependency 'rake',      ['>= 0.8.7']
 end
