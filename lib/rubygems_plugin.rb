@@ -1,3 +1,43 @@
+require 'rubygems/command'
+require 'rubygems/dependency_installer'
+
+class Gem::Commands::CompileCommand < Gem::Command
+
+  def initialize
+    super 'compile', 'Compile gems using the MacRuby compiler', :'remove-original-files' => false
+
+    add_option( '-r', '--[no-]remove-original-files',
+                'Delete the original *.rb source files after compiling',
+                ) do |value, options|
+      options[:'remove-original-files'] = value
+    end
+  end
+
+  def arguments # :nodoc:
+    'GEMNAME       name of gem to compile'
+  end
+
+  def defaults_str # :nodoc:
+    '--no-remove-original-files'
+  end
+
+  def description # :nodoc:
+    'TBD'
+  end
+
+  def usage # :nodoc:
+    "#{program_name} GEMNAME [GEMNAME ...]"
+  end
+
+  def execute
+    puts options.inspect
+  end
+
+end
+
+Gem::CommandManager.instance.register_command :compile
+
+
 Gem.post_install do |gem|
 
   spec  = gem.spec
