@@ -40,6 +40,8 @@ Gem::CommandManager.instance.register_command :compile
 
 Gem.post_install do |gem|
 
+  # @todo read option from .gemrc that would disable this hook
+
   spec  = gem.spec
   dir   = gem.gem_home + '/gems/' + spec.name + '-' + spec.version.version
 
