@@ -21,10 +21,6 @@ class Gem::Commands::CompileCommand < Gem::Command
     '--no-remove-original-files'
   end
 
-  def description # :nodoc:
-    'TBD'
-  end
-
   def usage # :nodoc:
     "#{program_name} GEMNAME [GEMNAME ...]"
   end
