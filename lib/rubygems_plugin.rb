@@ -1,6 +1,9 @@
 require 'rubygems/command'
 require 'rubygems/dependency_installer'
 
+##
+# @todo option to replace the original files, which implies removing
+
 class Gem::Commands::CompileCommand < Gem::Command
 
   def initialize
