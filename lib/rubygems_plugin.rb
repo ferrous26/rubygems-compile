@@ -34,9 +34,7 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def execute
 
-    specs = get_all_gem_names.map { |gem|
-      Gem.source_index.find_name gem
-    }.flatten.compact
+    specs = get_specs_for_gems get_all_gem_names
 
     if specs.empty?
       message = "Did not find any of: #{get_all_gem_names.join ', '}"
@@ -68,6 +66,12 @@ class Gem::Commands::CompileCommand < Gem::Command
       remove_original_files files if options[:'remove-original-files']
     }
 
+  end
+
+  def get_specs_for_gems gem_names # :nodoc:
+    gem_names.map { |gem|
+      Gem.source_index.find_name gem
+    }.flatten.compact
   end
 
   def remove_original_files # :nodoc:
