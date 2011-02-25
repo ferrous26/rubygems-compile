@@ -14,8 +14,6 @@ Right now, all you need to do is install the gem and it will be used every time 
 
 In the future, there are a few different ways this plugin could operate:
 
-* A gemspec property
-  * spec.compile_for_macruby = true
 * A gem command
   * gem compile nokogiri
   * gem compile --remove-original-files nokogiri
