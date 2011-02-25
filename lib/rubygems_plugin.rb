@@ -4,7 +4,10 @@ require 'rubygems/dependency_installer'
 class Gem::Commands::CompileCommand < Gem::Command
 
   def initialize
-    super 'compile', 'Compile gems using the MacRuby compiler', :'remove-original-files' => false
+    defaults = {
+      :'remove-original-files' => false,
+    }
+    super 'compile', 'Compile gems using the MacRuby compiler', defaults
 
     add_option( '-r', '--[no-]remove-original-files',
                 'Delete the original *.rb source files after compiling',
@@ -30,6 +33,7 @@ class Gem::Commands::CompileCommand < Gem::Command
   # that are located in the `require_path` for a gem.
 
   def execute
+
     specs = get_all_gem_names.map { |gem|
       Gem.source_index.find_name gem
     }.flatten.compact
@@ -42,6 +46,8 @@ class Gem::Commands::CompileCommand < Gem::Command
     specs.each { |gem|
       puts "Compiling #{gem.name}-#{gem.version}/"
 
+      # @todo get full file list from gemspec to try harder to find
+      #       all the *.rb files (ignoring test files)
       lib_dirs  = Gem.searcher.lib_dirs_for gem
       dirs      = Dir.glob lib_dirs
       files     = dirs.map { |dir| Dir.glob( dir + '/**/*.rb' ) }.flatten
@@ -53,11 +59,15 @@ class Gem::Commands::CompileCommand < Gem::Command
 
         # @todo double check to see how macruby_deploy calls the compiler
         `macrubyc -C '#{file}' -o '#{file}o'`
-        # @todo actually remove the file after I write some tests
-        puts 'removing original *.rb file now' if options[:'remove-original-files']
       }
+      remove_original_files files if options[:'remove-original-files']
     }
 
+  end
+
+  def remove_original_files # :nodoc:
+    # @todo use fileutils or is there a rubygems way?
+    say 'removing original *.rb file now' if verbose
   end
 
 end
