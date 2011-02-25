@@ -30,7 +30,10 @@ class Gem::Commands::CompileCommand < Gem::Command
   # that are located in the `require_path` for a gem.
 
   def execute
-    specs = get_all_gem_names.map { |gem| Gem.searcher.find gem }.compact
+    specs = get_all_gem_names.map { |gem|
+      Gem.source_index.find_name gem
+    }.flatten.compact
+
     if specs.empty?
       message = "Did not find any of: #{get_all_gem_names.join ', '}"
       raise ArgumentError, message
