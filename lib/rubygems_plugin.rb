@@ -43,8 +43,11 @@ class Gem::Commands::CompileCommand < Gem::Command
       raise ArgumentError, message
     end
 
+    verbose = Gem.configuration.verbose
+    slash   = verbose ? '/' : ''
+
     specs.each { |gem|
-      puts "Compiling #{gem.name}-#{gem.version}/"
+      say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
 
       # @todo get full file list from gemspec to try harder to find
       #       all the *.rb files (ignoring test files)
@@ -54,8 +57,10 @@ class Gem::Commands::CompileCommand < Gem::Command
       pp_regexp = Regexp.union dirs.map { |dir| dir.sub File.basename(dir), '' }
 
       files.each { |file|
-        pp_file = file.sub pp_regexp, ''
-        puts "\t#{pp_file} => #{pp_file}o"
+        if verbose
+          pp_file = file.sub pp_regexp, ''
+          say "\t#{pp_file} => #{pp_file}o"
+        end
 
         # @todo double check to see how macruby_deploy calls the compiler
         `macrubyc -C '#{file}' -o '#{file}o'`
