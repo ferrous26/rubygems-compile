@@ -6,6 +6,7 @@ require 'rubygems/command_manager'
 require 'rubygems_plugin'
 
 require 'minitest/pride'
+require 'minitest/mock'
 require 'minitest/autorun'
 
 class MiniTest::Unit::TestCase
