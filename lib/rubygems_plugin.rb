@@ -40,7 +40,7 @@ class Gem::Commands::CompileCommand < Gem::Command
   def execute
 
     verbose = Gem.configuration.verbose
-    slash   = verbose ? '/' : ''
+    slash   = verbose.is_a? Fixnum ? '/' : ''
 
     get_specs_for_gems(get_all_gem_names).each { |gem|
       say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
@@ -49,7 +49,7 @@ class Gem::Commands::CompileCommand < Gem::Command
       files = find_files_to_compile gem
 
       files.each { |file|
-        say "\t#{file} => #{file}o" if verbose
+        say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
         full_path = path + '/' + file
         `macrubyc -C '#{full_path}' -o '#{full_path}o'`
       }
@@ -73,7 +73,7 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def remove_original_files # :nodoc:
     # @todo use fileutils or is there a rubygems way?
-    say 'removing original *.rb file now' if verbose
+    say 'removing original *.rb file now' if verbose.is_a? Fixnum
     raise NotImplementedError
   end
 
