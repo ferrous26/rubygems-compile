@@ -9,4 +9,9 @@ require 'minitest/pride'
 require 'minitest/autorun'
 
 class MiniTest::Unit::TestCase
+  def setup
+    @command = Gem::Commands::CompileCommand.new
+  end
 end
+
+puts 'this suite only works if you have the rake gem installed'
