@@ -32,6 +32,8 @@ class Gem::Commands::CompileCommand < Gem::Command
   end
 
   ##
+  # @todo call #install when the gem does not exist
+  #
   # Lookup the gems and their listed files. It will only compile files
   # that are located in the `require_path` for a gem.
 
