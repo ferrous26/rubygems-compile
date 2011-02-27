@@ -80,6 +80,7 @@ class Gem::Commands::CompileCommand < Gem::Command
   def remove_original_files # :nodoc:
     # @todo use fileutils or is there a rubygems way?
     say 'removing original *.rb file now' if verbose
+    raise NotImplementedError
   end
 
 end
