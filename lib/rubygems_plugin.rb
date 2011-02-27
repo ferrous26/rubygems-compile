@@ -58,8 +58,8 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   end
 
-  def get_specs_for_gems *gem_names # :nodoc:
-    gem_names.map { |gem|
+  def get_specs_for_gems gem_names # :nodoc:
+    gem_names.flatten.map { |gem|
       spec = Gem.source_index.find_name gem
       spec ? spec : show_lookup_failure(gem, 'any', nil, :local)
     }.flatten.compact

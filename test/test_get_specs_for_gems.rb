@@ -6,8 +6,8 @@ class TestGetSpecsForGems < MiniTest::Unit::TestCase
     assert_empty @command.get_specs_for_gems 'not_a_real_gem'
   end
 
-  def test_takes_varargs
-    assert @command.get_specs_for_gems 'rake', 'not_a_real_gem'
+  def test_takes_an_array
+    assert @command.get_specs_for_gems ['rake', 'not_a_real_gem']
   end
 
   def test_returns_gemspecs
