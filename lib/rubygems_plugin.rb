@@ -40,7 +40,7 @@ class Gem::Commands::CompileCommand < Gem::Command
   def execute
 
     verbose = Gem.configuration.verbose
-    slash   = verbose.is_a? Fixnum ? '/' : ''
+    slash   = verbose.is_a?(Fixnum) ? '/' : ''
 
     get_specs_for_gems(get_all_gem_names).each { |gem|
       say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
