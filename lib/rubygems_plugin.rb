@@ -52,21 +52,13 @@ class Gem::Commands::CompileCommand < Gem::Command
     specs.each { |gem|
       say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
 
-      # @todo get full file list from gemspec to try harder to find
-      #       all the *.rb files (ignoring test files)
-      lib_dirs  = Gem.searcher.lib_dirs_for gem
-      dirs      = Dir.glob lib_dirs
-      files     = dirs.map { |dir| Dir.glob( dir + '/**/*.rb' ) }.flatten
-      pp_regexp = Regexp.union dirs.map { |dir| dir.sub File.basename(dir), '' }
+      path  = gem.full_gem_path
+      files = find_files_to_compile gem
 
       files.each { |file|
-        if verbose
-          pp_file = file.sub pp_regexp, ''
-          say "\t#{pp_file} => #{pp_file}o"
-        end
-
-        # @todo double check to see how macruby_deploy calls the compiler
-        `macrubyc -C '#{file}' -o '#{file}o'`
+        say "\t#{file} => #{file}o" if verbose
+        full_path = path + '/' + file
+        `macrubyc -C '#{full_path}' -o '#{full_path}o'`
       }
       remove_original_files files if options[:'remove-original-files']
     }
@@ -77,6 +69,12 @@ class Gem::Commands::CompileCommand < Gem::Command
     gem_names.map { |gem|
       Gem.source_index.find_name gem
     }.flatten.compact
+  end
+
+  def find_files_to_compile gem # :nodoc:
+    files = gem.files - gem.test_files - gem.extra_rdoc_files
+    files = files.reject do |file| file.match /^(?:test|spec)/ end
+    files.select do |file| file.match /\.rb$/ end
   end
 
   def remove_original_files # :nodoc:
