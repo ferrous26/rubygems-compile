@@ -39,17 +39,10 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def execute
 
-    specs = get_specs_for_gems get_all_gem_names
-
-    if specs.empty?
-      message = "Did not find any of: #{get_all_gem_names.join ', '}"
-      raise ArgumentError, message
-    end
-
     verbose = Gem.configuration.verbose
     slash   = verbose ? '/' : ''
 
-    specs.each { |gem|
+    get_specs_for_gems(get_all_gem_names).each { |gem|
       say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
 
       path  = gem.full_gem_path
@@ -67,7 +60,8 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def get_specs_for_gems *gem_names # :nodoc:
     gem_names.map { |gem|
-      Gem.source_index.find_name gem
+      spec = Gem.source_index.find_name gem
+      spec ? spec : show_lookup_failure(gem, 'any', nil, :local)
     }.flatten.compact
   end
 
