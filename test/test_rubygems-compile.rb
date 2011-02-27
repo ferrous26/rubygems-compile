@@ -1,5 +1,7 @@
 require 'helper'
 
+puts 'this suite only works if you have the rake gem installed'
+
 class TestRubygemsCompile < MiniTest::Unit::TestCase
 
   def setup
