@@ -1,11 +1,9 @@
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
   s.version = '0.0.3'
 
-  s.required_rubygems_version = '>= 1.4.2'
-  s.rubygems_version          = '1.4.2'
+  s.required_rubygems_version = Gem::Requirement.new '>= 1.4.2'
+  s.rubygems_version          = Gem::VERSION
 
   s.summary       = 'A rubygems post-install hook using the MacRuby compiler to compile gems'
   s.description   = <<-EOS
@@ -27,8 +25,8 @@ or you will end up compiling your gems multiple times.
   s.require_paths = ['lib']
 
   s.files            = Dir.glob('lib/**/*.rb')
-#  s.test_files       = Dir.glob('test/**/*_test.rb') + ['test/helper.rb']
-  s.extra_rdoc_files = [ 'LICENSE.txt', 'README.rdoc' ]
+  s.test_files       = Dir.glob('test/**/test_*.rb') + ['test/helper.rb']
+  s.extra_rdoc_files = [ 'Rakefile', 'LICENSE.txt', 'README.rdoc' ]
 
   s.add_development_dependency 'rake',      ['>= 0.8.7']
 end
