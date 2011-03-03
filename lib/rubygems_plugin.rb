@@ -1,5 +1,6 @@
 require 'rubygems/command'
 require 'rubygems/dependency_installer'
+require 'fileutils'
 
 ##
 # @todo option to replace the original files, which implies removing
@@ -50,8 +51,12 @@ class Gem::Commands::CompileCommand < Gem::Command
         say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
         full_path = path + '/' + file
         `macrubyc -C '#{full_path}' -o '#{full_path}o'`
+
+        if options[:'remove-original-files']
+          say "\trm #{full_path}" if verbose.is_a? Fixnum
+          FileUtils.rm full_path
+        end
       }
-      remove_original_files files if options[:'remove-original-files']
     }
 
   end
@@ -73,12 +78,6 @@ class Gem::Commands::CompileCommand < Gem::Command
     files = gem.files - gem.test_files - gem.extra_rdoc_files
     files = files.reject do |file| file.match /^(?:test|spec)/ end
     files.select do |file| file.match /\.rb$/ end
-  end
-
-  def remove_original_files # :nodoc:
-    # @todo use fileutils or is there a rubygems way?
-    say 'removing original *.rb file now' if verbose.is_a? Fixnum
-    raise NotImplementedError
   end
 
 end
