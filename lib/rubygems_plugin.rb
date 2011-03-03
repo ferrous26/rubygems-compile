@@ -32,8 +32,6 @@ class Gem::Commands::CompileCommand < Gem::Command
   end
 
   ##
-  # @todo call #install when the gem does not exist
-  #
   # Lookup the gems and their listed files. It will only compile files
   # that are located in the `require_path` for a gem.
 
@@ -61,7 +59,13 @@ class Gem::Commands::CompileCommand < Gem::Command
   def get_specs_for_gems gem_names # :nodoc:
     gem_names.flatten.map { |gem|
       spec = Gem.source_index.find_name gem
-      spec ? spec : show_lookup_failure(gem, 'any', nil, :local)
+      if spec
+        spec
+      else
+        say "#{gem} is not installed, trying remote lookup"
+        installer = Gem::DependencyInstaller.new( :domain => :remote )
+        installer.install gem # in this case we compile all dependencies, too
+      end
     }.flatten.compact
   end
 
