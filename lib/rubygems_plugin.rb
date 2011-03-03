@@ -59,12 +59,12 @@ class Gem::Commands::CompileCommand < Gem::Command
   def get_specs_for_gems gem_names # :nodoc:
     gem_names.flatten.map { |gem|
       spec = Gem.source_index.find_name gem
-      if spec
-        spec
-      else
+      if spec.empty?
         say "#{gem} is not installed, trying remote lookup"
         installer = Gem::DependencyInstaller.new( :domain => :remote )
         installer.install gem # in this case we compile all dependencies, too
+      else
+        spec
       end
     }.flatten.compact
   end
