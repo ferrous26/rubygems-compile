@@ -7,7 +7,7 @@ require 'rubygems-compile/common_methods'
 # Remove the compiled files for a gem. This is sometimes necessary for
 # gems that do not work after being compiled.
 
-class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
+class Gem::Commands::DecompileCommand < Gem::Commands::InstallCommand
   include Gem::Compile::Methods
 
   def initialize
