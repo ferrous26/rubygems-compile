@@ -13,6 +13,9 @@ And then you're off to the races! When you install gems using `macgem compile` t
 * A gem install option would be most natural
   * gem install --compile nokogiri
 * Compile dependency gems that get installed
+* Timestamp detection to avoid recompiling files
+* Code parsing to WARN about gems that will not work when compiled
+  * This could possibly allow for smaller/combined binary files
 
 == Caveats
 
