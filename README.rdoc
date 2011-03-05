@@ -12,6 +12,7 @@ And then you're off to the races! When you install gems using `macgem compile` t
 
 * A gem install option would be most natural
   * gem install --compile nokogiri
+* Compile dependency gems that get installed
 
 == Caveats
 
