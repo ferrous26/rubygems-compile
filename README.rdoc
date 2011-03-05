@@ -8,6 +8,8 @@ All you need to do is:
 
 And then you're off to the races! When you install gems using `macgem compile` the gem will also be compiled.
 
+In the case of something bad happening with the compiled version of a gem, you can revert to the non-compiled version of the gem using `macgem decompile`.
+
 == TODO
 
 * A gem install option would be most natural
