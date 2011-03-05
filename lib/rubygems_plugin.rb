@@ -1,4 +1,5 @@
 require 'rubygems/command'
+require 'rubygems/commands/install_command'
 require 'fileutils'
 require 'rbconfig'
 
@@ -7,13 +8,16 @@ require 'rbconfig'
 # includes the option to remove the original *.rb files leaving
 # only the compiled *.rbo files.
 
-class Gem::Commands::CompileCommand < Gem::Command
+class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
 
   MACRUBYC = File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
 
   def initialize
-    defaults = { :'remove-original-files'  => false, }
-    super 'compile', 'Compile gems using the MacRuby compiler', defaults
+    super
+    @command = 'compile'
+    @summary = 'Install and compile gems using the MacRuby compiler'
+    @program_name = 'gem compile'
+    defaults[:'remove-original-files'] = false
 
     add_option( '-r', '--[no-]remove-original-files',
                 'Delete the original *.rb source files after compiling',
@@ -22,16 +26,8 @@ class Gem::Commands::CompileCommand < Gem::Command
     end
   end
 
-  def arguments # :nodoc:
-    'GEMNAME       name of gem to compile'
-  end
-
   def defaults_str # :nodoc:
-    '--no-remove-original-files'
-  end
-
-  def usage # :nodoc:
-    "#{program_name} GEMNAME [GEMNAME ...]"
+    super + "\n--no-remove-original-files"
   end
 
   ##
@@ -39,6 +35,11 @@ class Gem::Commands::CompileCommand < Gem::Command
   # that are located in the `require_path` for a gem.
 
   def execute
+    begin
+      super
+    rescue Gem::SystemExitException => e
+      raise Gem::SystemExitException, e.message unless e.exit_code.zero?
+    end
 
     verbose      = Gem.configuration.verbose
     slash        = verbose.is_a?(Fixnum) ? '/' : ''
