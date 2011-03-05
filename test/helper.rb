@@ -5,7 +5,7 @@ require 'rubygems'
 require 'rubygems/command_manager'
 require 'rubygems_plugin'
 
-gem     'minitest'
+gem     'minitest', '>= 2.0.2'
 require 'minitest/pride'
 require 'minitest/autorun'
 
@@ -14,5 +14,3 @@ class MiniTest::Unit::TestCase
     @command = Gem::Commands::CompileCommand.new
   end
 end
-
-puts 'this suite only works if you have the minitest gem installed'
