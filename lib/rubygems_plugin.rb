@@ -78,6 +78,7 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
   def find_files_to_compile gem # :nodoc:
     files = gem.files - gem.test_files - gem.extra_rdoc_files
     files = files.reject do |file| file.match /^(?:test|spec)/ end
+    # this cuts out the .rb.data file in the mime-types gem
     files.select do |file| file.match /\.rb$/ end
   end
 
