@@ -12,9 +12,10 @@ A rubygems post-install hook to compile gems using the MacRuby compiler.
   s.post_install_message = <<-EOS
 
 ***********************************************************
-Make sure to uninstall versions of rubygems-compile prior
-to 0.1.0 or you will end up compiling your gems multiple
-times.
+
+You should uninstall previous versions of this gem, or else
+rubygems will try to load each version of the gem.
+
 ***********************************************************
 
   EOS
