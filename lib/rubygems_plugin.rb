@@ -1,5 +1,4 @@
 require 'rubygems/command'
-require 'rubygems/dependency_installer'
 require 'fileutils'
 require 'rbconfig'
 
