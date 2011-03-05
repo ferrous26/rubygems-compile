@@ -49,9 +49,18 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def execute
 
-    verbose   = Gem.configuration.verbose
-    slash     = verbose.is_a?(Fixnum) ? '/' : ''
-    extension = options[:'replace-original-files'] ? '' : 'o'
+    verbose      = Gem.configuration.verbose
+    slash        = verbose.is_a?(Fixnum) ? '/' : ''
+    extension    = 'o'
+    post_compile = Proc.new do |file| end
+
+    if options[:'replace-original-files']
+      extension = ''
+      post_compile = Proc.new do |file| FileUtils.mv "#{file}o", file; end
+    elsif options[:'remove-original-files']
+      post_compile = Proc.new do |file| FileUtils.rm file; end
+    end
+
 
     get_specs_for_gems(get_all_gem_names).each { |gem|
       say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
@@ -62,12 +71,8 @@ class Gem::Commands::CompileCommand < Gem::Command
       files.each { |file|
         say "\t#{file} => #{file}#{extension}" if verbose.is_a? Fixnum
         full_path = path + '/' + file
-        `#{MACRUBYC} -C '#{full_path}' -o '#{full_path}#{extension}'`
-
-        if options[:'remove-original-files']
-          say "\trm #{full_path}" if verbose.is_a? Fixnum
-          FileUtils.rm full_path
-        end
+        `#{MACRUBYC} -C '#{full_path}' -o '#{full_path}o'`
+        post_compile.call full_path
       }
     }
 
