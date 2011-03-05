@@ -12,8 +12,6 @@ require 'rubygems-compile/common_methods'
 class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
   include Gem::Compile::Methods
 
-  MACRUBYC = File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
-
   def initialize
     super
     @command = 'compile'

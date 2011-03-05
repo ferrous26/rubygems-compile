@@ -2,6 +2,8 @@ module Gem
 module Compile
 module Methods
 
+  MACRUBYC = File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
+
   def get_specs_for_gems gem_names # :nodoc:
     gem_names.flatten.map { |gem|
       Gem.source_index.find_name gem
