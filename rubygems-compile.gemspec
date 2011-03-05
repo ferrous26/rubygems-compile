@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
 
   s.required_rubygems_version = Gem::Requirement.new '>= 1.4.2'
   s.rubygems_version          = Gem::VERSION
