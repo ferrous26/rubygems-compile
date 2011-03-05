@@ -4,6 +4,9 @@ require 'fileutils'
 require 'rbconfig'
 
 ##
+# Use the MacRuby compiler to compile gems at install time. This
+# includes the option to remove the original *.rb files leaving
+# only the compiled *.rbo files.
 
 class Gem::Commands::CompileCommand < Gem::Command
 
