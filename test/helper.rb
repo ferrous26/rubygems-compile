@@ -15,4 +15,4 @@ class MiniTest::Unit::TestCase
   end
 end
 
-puts 'this suite only works if you have the rake gem installed'
+puts 'this suite only works if you have the minitest gem installed'
