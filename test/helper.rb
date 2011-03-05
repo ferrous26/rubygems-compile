@@ -5,6 +5,7 @@ require 'rubygems'
 require 'rubygems/command_manager'
 require 'rubygems_plugin'
 
+gem     'minitest'
 require 'minitest/pride'
 require 'minitest/autorun'
 
