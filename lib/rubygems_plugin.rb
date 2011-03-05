@@ -12,14 +12,22 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def initialize
     defaults = {
-      :'remove-original-files' => false,
+      :'remove-original-files'  => false,
+      :'replace-original-files' => false
     }
     super 'compile', 'Compile gems using the MacRuby compiler', defaults
 
     add_option( '-r', '--[no-]remove-original-files',
                 'Delete the original *.rb source files after compiling',
                 ) do |value, options|
-      options[:'remove-original-files'] = value
+      options[:'remove-original-files']  = value
+      options[:'replace-original-files'] = !value
+    end
+    add_option( '-R', '--[no-]replace-original-files',
+                'Replace the original *.rb files with their compiled version',
+                ) do |value, options|
+      options[:'replace-original-files'] = value
+      options[:'remove-original-files']  = !value
     end
   end
 
@@ -41,8 +49,8 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def execute
 
-    verbose = Gem.configuration.verbose
-    slash   = verbose.is_a?(Fixnum) ? '/' : ''
+    verbose   = Gem.configuration.verbose
+    slash     = verbose.is_a?(Fixnum) ? '/' : ''
     extension = options[:'replace-original-files'] ? '' : 'o'
 
     get_specs_for_gems(get_all_gem_names).each { |gem|
