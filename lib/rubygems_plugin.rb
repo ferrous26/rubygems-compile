@@ -1,11 +1,14 @@
 require 'rubygems/command'
 require 'rubygems/dependency_installer'
 require 'fileutils'
+require 'rbconfig'
 
 ##
 # @todo option to replace the original files, which implies removing
 
 class Gem::Commands::CompileCommand < Gem::Command
+
+  MACRUBYC = File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
 
   def initialize
     defaults = {
@@ -51,7 +54,7 @@ class Gem::Commands::CompileCommand < Gem::Command
       files.each { |file|
         say "\t#{file} => #{file}#{extension}" if verbose.is_a? Fixnum
         full_path = path + '/' + file
-        `macrubyc -C '#{full_path}' -o '#{full_path}o'`
+        `#{MACRUBYC} -C '#{full_path}' -o '#{full_path}#{extension}'`
 
         if options[:'remove-original-files']
           say "\trm #{full_path}" if verbose.is_a? Fixnum
