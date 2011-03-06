@@ -4,6 +4,8 @@ require 'rubygems/commands/install_command'
 require 'rubygems-compile/common_methods'
 
 ##
+# @todo need to look at dependencies too? use --include-dependencies option?
+#
 # Remove the compiled files for a gem. This is sometimes necessary for
 # gems that do not work after being compiled.
 
