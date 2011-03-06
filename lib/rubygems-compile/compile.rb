@@ -13,12 +13,12 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
   include Gem::Compile::Methods
 
   def initialize
-    super
-    @command = 'compile'
+    super # so that InstallCommand options are registered
+    @command = 'compile' # now we override certain attributes
     @summary = 'Install and compile gems using the MacRuby compiler'
     @program_name = 'gem compile'
-    defaults[:'remove-original-files'] = false
 
+    defaults[:'remove-original-files'] = false
     add_option( '-r', '--[no-]remove-original-files',
                 'Delete the original *.rb source files after compiling',
                 ) do |value, options|
@@ -35,11 +35,6 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
   # that are located in the `require_path` for a gem.
 
   def execute
-    begin
-      super
-    rescue Gem::SystemExitException => e
-      raise Gem::SystemExitException, e.message unless e.exit_code.zero?
-    end
 
     verbose      = Gem.configuration.verbose
     slash        = verbose.is_a?(Fixnum) ? '/' : ''
@@ -49,15 +44,15 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
       post_compile = Proc.new do |file, full_path|
         say "\tRemoving #{file}" if verbose.is_a? Fixnum
         FileUtils.rm full_path
-      end
+        end
     end
 
+    Gem.post_install do |gem|
+      spec = gem.spec
+      say "Compiling #{spec.name}-#{spec.version}#{slash}" if verbose
 
-    get_specs_for_gems(get_all_gem_names).each { |gem|
-      say "Compiling #{gem.name}-#{gem.version}#{slash}" if verbose
-
-      path  = gem.full_gem_path
-      files = find_files_to_compile gem
+      path  = spec.full_gem_path
+      files = find_files_to_compile spec
 
       files.each { |file|
         say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
@@ -65,8 +60,9 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
         `#{MACRUBYC} -C '#{full_path}' -o '#{full_path}o'`
         post_compile.call file, full_path
       }
-    }
+    end
 
+    super
   end
 
 end
