@@ -18,8 +18,8 @@ class Gem::Commands::DecompileCommand < Gem::Commands::InstallCommand
   end
 
   ##
-  # Lookup the gems and their listed files. It will only compile files
-  # that are located in the `require_path` for a gem.
+  # Try to only remove *.rbo files, but in the case that the original *.rb files
+  # are gone, we will also have to reinstall the gem.
 
   def execute
 
