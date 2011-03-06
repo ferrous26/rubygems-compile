@@ -8,7 +8,7 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-task :default => :'gem:build'
+task :default => :test
 
 namespace :macruby do
   desc 'AOT compile'
