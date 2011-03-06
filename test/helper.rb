@@ -5,9 +5,9 @@ require 'rubygems'
 require 'rubygems/command_manager'
 require 'rubygems_plugin'
 
-gem     'minitest', '>= 2.0.2'
-require 'minitest/pride'
+gem     'minitest-macruby-pride', '>= 2.1.1'
 require 'minitest/autorun'
+require 'minitest/pride'
 
 class MiniTest::Unit::TestCase
   def setup

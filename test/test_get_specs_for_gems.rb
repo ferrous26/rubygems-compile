@@ -11,7 +11,7 @@ class TestGetSpecsForGems < MiniTest::Unit::TestCase
   end
 
   def test_returns_gemspecs
-    ret = @command.get_specs_for_gems ['minitest']
+    ret = @command.get_specs_for_gems ['minitest-macruby-pride']
     assert_instance_of Array, ret
     assert_instance_of Gem::Specification, ret.first
   end
