@@ -13,8 +13,13 @@ A rubygems post-install hook to compile gems using the MacRuby compiler.
 
 ***********************************************************
 
-You should uninstall previous versions of this gem, or else
+Please uninstall previous versions of this gem, or else
 rubygems will try to load each version of the gem.
+
+The functionality of this gem has changed since the 0.0.x
+series. It now operates as its own command, see the README.
+
+https://github.com/ferrous26/rubygems-compile
 
 ***********************************************************
 
