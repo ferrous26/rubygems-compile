@@ -1,5 +1,6 @@
 require 'rbconfig'
 require 'fileutils'
+require 'macruby/compiler'
 require 'rubygems/command'
 require 'rubygems/commands/install_command'
 require 'rubygems-compile/common_methods'
@@ -39,6 +40,7 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
     verbose      = Gem.configuration.verbose
     slash        = verbose.is_a?(Fixnum) ? '/' : ''
     post_compile = Proc.new do |_,_| end
+    compile_options = { bundle: true }
 
     if options[:'remove-original-files']
       post_compile = Proc.new do |file, full_path|
@@ -57,7 +59,8 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
       files.each { |file|
         say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
         full_path = path + '/' + file
-        `#{MACRUBYC} -C '#{full_path}' -o '#{full_path}o'`
+        compile_options.merge! files: [full_path], output: "#{full_path}o"
+        Compiler.new( compile_options ).run
         post_compile.call file, full_path
       }
     end
