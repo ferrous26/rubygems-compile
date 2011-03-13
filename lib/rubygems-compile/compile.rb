@@ -44,7 +44,7 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
       post_compile = Proc.new do |file, full_path|
         say "\tRemoving #{file}" if verbose.is_a? Fixnum
         FileUtils.rm full_path
-        end
+      end
     end
 
     Gem.post_install do |gem|
