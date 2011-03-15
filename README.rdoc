@@ -1,34 +1,34 @@
 = rubygems-compile
 
-A compile command for `macgem` to install and compile gems using the MacRuby compiler.
+A compile command for <tt>macgem</tt> to install and compile gems using the MacRuby compiler.
 
 All you need to do is:
 
      gem install rubygems-compile
 
-And then you're off to the races! When you install gems using `macgem compile` the gem will also be compiled.
+And then you're off to the races! When you install gems using <tt>macgem compile</tt> the gem will also be compiled.
 
 == Description
 
-`rubygems-compile` provides two additional commands for `macgem`. The first is `compile`; you can now say `macgem compile nokogiri` and the `nokogiri` gem will be installed and compiled. Then, whenever you use `nokogiri`, the compiled version of the gem files will be loaded instead of the uncompiled version of the gem files.
+<tt>rubygems-compile</tt> provides two additional commands for <tt>macgem</tt>. The first is <tt>compile</tt>; you can now say <tt>macgem compile nokogiri</tt> and the <tt>nokogiri</tt> gem will be installed and compiled. Then, whenever you use <tt>nokogiri</tt>, the compiled version of the gem files will be loaded instead of the uncompiled version of the gem files.
 
-`macgem compile` is a superset of the `gem install` command, so you can still use all the options you would normally use. `macgem compile` has one extra option to delete all the original .rb files after the .rbo is generated; use this option with caution.
+<tt>macgem compile</tt> is a superset of the <tt>gem install</tt> command, so you can still use all the options you would normally use. <tt>macgem compile</tt> has one extra option to delete all the original .rb files after the .rbo is generated; use this option with caution.
 
-Some gems work perfectly when compiled, and some do not (for various reasons), so you should try a gem non-compiled first. If you dove head first into using compiled gems and you need to back-peddle, you will have to uninstall and then reinstall the gem (NOTE: a `macgem decompile` to remove the .rbo files and, if needed, reinstall the gem all in one step is included but only works for normal cases (no dependency decompiling, no custom install directories)).
+Some gems work perfectly when compiled, and some do not (for various reasons), so you should try a gem non-compiled first. If you dove head first into using compiled gems and you need to back-peddle, you will have to uninstall and then reinstall the gem (NOTE: a <tt>macgem decompile</tt> to remove the .rbo files and, if needed, reinstall the gem all in one step is included but only works for normal cases (no dependency decompiling, no custom install directories)).
 
 == Caveats
 
 * Large gems will take a long time to compile, but these are the gems that will benefit the most from being compiled
 * This has only been tested on a few gems, but should not break existing gems since we leave the original files around by default
-* As of MacRuby 0.9, you cannot get usable backtrace data for compiled ruby files
-  * This may be fixed for MacRuby 0.10
-* The 1-to-1 correlation of .rb files to .rbo files can make gems quite a bit bigger on disk
+* As of MacRuby 0.10, you cannot get usable backtrace data for compiled ruby files
+  * This may be fixed for MacRuby 0.11
+* .rbo files take up more disk space than their .rb equivalents
 
 == Known Reasons A Compiled Gem Will Not Work
 
-* Using non-standard file suffixes (e.g. `mime-types` has a `.rb.data` file)
+* Using non-standard file suffixes (e.g. <tt>mime-types</tt> has a <tt>.rb.data</tt> file)
   * This will be addressed in a later release
-* Gems that explicitly require a file with the file suffix (e.g. `require 'nokogiri.rb'`)
+* Gems that explicitly require a file with the file suffix (e.g. <tt>require 'nokogiri.rb'</tt>)
   * This should be addressable in a future release
 
 == TODO
