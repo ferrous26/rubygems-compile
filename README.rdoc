@@ -14,7 +14,7 @@ And then you're off to the races! When you install gems using <tt>macgem compile
 
 <tt>macgem compile</tt> is a superset of the <tt>gem install</tt> command, so you can still use all the options you would normally use. <tt>macgem compile</tt> has one extra option to delete all the original .rb files after the .rbo is generated; use this option with caution.
 
-Some gems work perfectly when compiled, and some do not (for various reasons), so you should try a gem non-compiled first. If you dove head first into using compiled gems and you need to back-peddle, you will have to uninstall and then reinstall the gem (NOTE: a <tt>macgem decompile</tt> to remove the .rbo files and, if needed, reinstall the gem all in one step is included but only works for normal cases (no dependency decompiling, no custom install directories)).
+Some gems work perfectly when compiled, and some do not (for various reasons), so you should try a gem non-compiled first. If you dove head first into using compiled gems and you need to back-peddle, you will have to uninstall and then reinstall the gem.
 
 == Caveats
 
