@@ -11,13 +11,10 @@ end
 task :default => :test
 
 namespace :macruby do
-  desc 'AOT compile'
-  task :compile do
-    FileList["lib/**/*.rb"].each do |source|
-      name = File.basename source
-      puts "#{name} => #{name}o"
-      `macrubyc --arch x86_64 -C '#{source}' -o '#{source}o'`
-    end
+  require 'rake/compiletask'
+  Rake::CompileTask.new do |t|
+    t.files   = FileList["lib/**/*.rb"]
+    t.verbose = true
   end
 
   desc 'Clean MacRuby binaries'
