@@ -29,13 +29,13 @@ namespace :macruby do
 end
 
 namespace :gem do
+  require 'rubygems/builder'
+  require 'rubygems/installer'
+  spec = Gem::Specification.load('rubygems-compile.gemspec')
+
   desc 'Build the gem'
-  task :build do
-    puts `gem build -v rubygems-compile.gemspec`
-  end
+  task :build do Gem::Builder.new(spec).build end
 
   desc 'Build the gem and install it'
-  task :install => :build do
-    puts `gem install #{Dir.glob('rubygems-compile*.gem').sort.reverse.first}`
-  end
+  task :install => :build do Gem::Installer.new(spec.file_name).install end
 end
