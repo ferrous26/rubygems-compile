@@ -57,8 +57,8 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
       files.each { |file|
         say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
         full_path = path + '/' + file
-        compile_options.merge! files: [full_path], output: "#{full_path}o"
-        Compiler.new( compile_options ).run
+        compile_options.merge!( files: [full_path], output: "#{full_path}o" )
+        MacRuby::Compiler.new( compile_options ).run
         post_compile.call file, full_path
       }
     end
