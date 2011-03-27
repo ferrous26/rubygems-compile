@@ -1,5 +1,5 @@
-require 'rubygems'
 require 'rake'
+task :default => :test
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -7,8 +7,6 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
 end
-
-task :default => :test
 
 namespace :macruby do
   require 'rake/compiletask'
@@ -20,12 +18,14 @@ namespace :macruby do
   desc 'Clean MacRuby binaries'
   task :clean do
     FileList["lib/**/*.rbo"].each do |bin|
+      puts "rm #{bin}"
       rm bin
     end
   end
 end
 
 namespace :gem do
+  require 'rubygems'
   require 'rubygems/builder'
   require 'rubygems/installer'
   spec = Gem::Specification.load('rubygems-compile.gemspec')
