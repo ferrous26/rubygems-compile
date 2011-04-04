@@ -40,6 +40,10 @@ Some gems work perfectly when compiled, and some do not (for various reasons), s
   * A naive implementation will not work for gems that are loaded modularly
 * Files in bin/ usually don't include the file extension and are not compiled
 
+== Note
+
+The functionality provided by this gem can be enabled by default in MacRuby by applying a patch found in my MacRuby fork at https://github.com/ferrous26/MacRuby/tree/rubygems-rbo.
+
 == Copyright
 
 Copyright (c) 2011 Mark Rada. See LICENSE.txt for further details.
