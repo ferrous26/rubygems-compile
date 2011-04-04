@@ -52,7 +52,11 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
       say "Compiling #{spec.name}-#{spec.version}#{slash}" if verbose
 
       path  = spec.full_gem_path
-      files = find_files_to_compile spec
+
+      files = spec.files - spec.test_files - spec.extra_rdoc_files
+      files = files.reject do |file| file.match /^(?:test|spec)/ end
+      # note: we ignore the .rb.data file in the mime-types gem
+      files = files.select do |file| file.match /\.rb$/ end
 
       files.each { |file|
         say "\t#{file} => #{file}o" if verbose.is_a? Fixnum
@@ -64,13 +68,6 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
     end
 
     super
-  end
-
-  def find_files_to_compile gem # :nodoc:
-    files = gem.files - gem.test_files - gem.extra_rdoc_files
-    files = files.reject do |file| file.match /^(?:test|spec)/ end
-    # this cuts out the .rb.data file in the mime-types gem
-    files.select do |file| file.match /\.rb$/ end
   end
 
 end
