@@ -8,20 +8,6 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rake/compiletask'
-Rake::CompileTask.new do |t|
-  t.files   = FileList["lib/**/*.rb"]
-  t.verbose = true
-end
-
-desc 'Clean MacRuby binaries'
-task :clean do
-  FileList["lib/**/*.rbo"].each do |bin|
-    puts "rm #{bin}"
-    rm bin
-  end
-end
-
 require 'rubygems'
 require 'rubygems/builder'
 require 'rubygems/installer'
