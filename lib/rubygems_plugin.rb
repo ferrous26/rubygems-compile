@@ -9,18 +9,6 @@ unless Kernel.const_defined? 'Compiler'
   load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
 end
 
-unless Gem.suffixes.include? '.rbo'
-  module Gem
-    class << self
-      # To get around how rubygems-1.4.2 set's suffixes
-      alias_method :rubygems_compile_suffixes, :suffixes
-      def suffixes
-        ['.rbo'] + rubygems_compile_suffixes
-      end
-    end
-  end
-end
-
 ##
 # Use the MacRuby compiler to compile gems at install time. This
 # includes the option to remove the original *.rb files leaving
@@ -33,13 +21,6 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
     @command = 'compile' # now we override certain attributes
     @summary = 'Install and compile gems using the MacRuby compiler'
     @program_name = 'gem compile'
-
-    defaults[:'remove-original-files'] = false
-    add_option( '-r', '--[no-]remove-original-files',
-                'Delete the original *.rb source files after compiling',
-                ) do |value, options|
-      options[:'remove-original-files'] = value
-    end
   end
 
   def defaults_str # :nodoc:
@@ -59,14 +40,6 @@ This rubygems extensions is obsolete, you should uninstall rubygems-compile.
 You can just use `macgem install` now.
       EOM
       return
-    end
-
-    post_compile = Proc.new { |_| }
-    if options[:'remove-original-files']
-      post_compile = Proc.new do |file|
-        say "\tRemoving #{File.basename(file)}" if Gem.configuration.really_verbose
-        FileUtils.rm file
-      end
     end
 
     Gem.post_install do |gem|
@@ -90,7 +63,6 @@ You can just use `macgem install` now.
                         files: [full_path],
                        output: "#{full_path}o"
                        ).run
-        post_compile.call(full_path)
       }
     end
 
