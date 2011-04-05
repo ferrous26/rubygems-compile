@@ -2,7 +2,12 @@ require 'rbconfig'
 require 'fileutils'
 require 'rubygems/command'
 require 'rubygems/commands/install_command'
-load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
+
+DID_NOT_LOAD_COMPILER_MYSELF   = true
+unless Kernel.const_defined? 'Compiler'
+  DID_NOT_LOAD_COMPILER_MYSELF = false
+  load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
+end
 
 unless Gem.suffixes.include? '.rbo'
   module Gem
@@ -46,6 +51,15 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
   # that are located in the `require_path` for a gem.
 
   def execute
+
+    if DID_NOT_LOAD_COMPILER_MYSELF
+      say <<-EOM
+This version of MacRuby already does gem compilation!
+This rubygems extensions is obsolete, you should uninstall rubygems-compile.
+You can just use `macgem install` now.
+      EOM
+      return
+    end
 
     post_compile = Proc.new { |_| }
     if options[:'remove-original-files']
