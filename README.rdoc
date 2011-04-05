@@ -4,15 +4,15 @@ A compile command for <tt>macgem</tt> to install and compile gems using the MacR
 
 All you need to do is:
 
-     gem install rubygems-compile
+     macgem install rubygems-compile
 
 And then you're off to the races! When you install gems using <tt>macgem compile</tt> the gem will also be compiled.
 
 == Description
 
-<tt>rubygems-compile</tt> provides two additional commands for <tt>macgem</tt>. The first is <tt>compile</tt>; you can now say <tt>macgem compile nokogiri</tt> and the <tt>nokogiri</tt> gem will be installed and compiled. Then, whenever you use <tt>nokogiri</tt>, the compiled version of the gem files will be loaded instead of the uncompiled version of the gem files.
+<tt>rubygems-compile</tt> provides an additional commands for <tt>macgem</tt>. The first is <tt>compile</tt>; you can now say <tt>macgem compile nokogiri</tt> and the <tt>nokogiri</tt> gem will be installed and compiled. Then, whenever you use <tt>nokogiri</tt>, the compiled version of the gem files will be loaded instead of the uncompiled version of the gem files.
 
-<tt>macgem compile</tt> is a superset of the <tt>gem install</tt> command, so you can still use all the options you would normally use. <tt>macgem compile</tt> has one extra option to delete all the original .rb files after the .rbo is generated; use this option with caution.
+<tt>macgem compile</tt> is a superset of the <tt>macgem install</tt> command, so you can still use all the options you would normally use.
 
 Some gems work perfectly when compiled, and some do not (for various reasons), so you should try a gem non-compiled first. If you dove head first into using compiled gems and you need to back-peddle, you will have to uninstall and then reinstall the gem.
 
@@ -27,9 +27,9 @@ Some gems work perfectly when compiled, and some do not (for various reasons), s
 == Known Reasons A Compiled Gem Will Not Work
 
 * Using non-standard file suffixes (e.g. <tt>mime-types</tt> has a <tt>.rb.data</tt> file)
-  * This will be addressed in a later release
+  * This will be addressed in a later release (possibly)
 * Gems that explicitly require a file with the file suffix (e.g. <tt>require 'nokogiri.rb'</tt>)
-  * This should be addressable in a future release
+  * This should be addressable in a future release (possibly)
 
 == TODO
 
