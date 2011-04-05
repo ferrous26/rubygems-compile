@@ -60,7 +60,7 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
 
       if Gem.configuration.verbose
         slash = Gem.configuration.really_verbose ? '/' : ''
-        say "Compiling #{spec.name}-#{spec.version}#{slash}"
+        say "Compiling #{spec.full_name}#{slash}"
       end
 
       files = spec.files - spec.test_files - spec.extra_rdoc_files
