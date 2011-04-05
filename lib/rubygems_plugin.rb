@@ -38,6 +38,7 @@ class Gem::Commands::CompileCommand < Gem::Commands::InstallCommand
 This version of MacRuby already does gem compilation!
 This rubygems extensions is obsolete, you should uninstall rubygems-compile.
 You can just use `macgem install` now.
+ABORTING!!!
       EOM
       return
     end
