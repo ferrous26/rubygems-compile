@@ -1,4 +1,4 @@
-Gem::Specification.new do |s|
+GEM_SPEC = Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
   s.version = '1.0.0'
 

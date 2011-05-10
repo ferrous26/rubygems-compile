@@ -1,20 +1,30 @@
-require 'rake'
-task :default => :test
-
+require 'rubygems'
+require 'rake/compiletask'
 require 'rake/testtask'
+require 'rake/gempackagetask'
+require 'rubygems/dependency_installer'
+
+task :default => :build
+
+Rake::CompileTask.new do |t|
+  t.files = FileList['lib/**/*.rb']
+  t.verbose = true
+end
+
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
 end
 
-require 'rubygems'
-require 'rubygems/builder'
-require 'rubygems/installer'
-spec = Gem::Specification.load('rubygems-compile.gemspec')
+eval IO.read('rubygems-compile.gemspec')
 
-desc 'Build the gem'
-task :build do Gem::Builder.new(spec).build end
+Rake::GemPackageTask.new(GEM_SPEC) do |pkg|
+  pkg.need_zip = false
+  pkg.need_tar = true
+end
 
 desc 'Build the gem and install it'
-task :install => :build do Gem::Installer.new(spec.file_name).install end
+task :install => :gem do
+  Gem::Installer.new("pkg/#{GEM_SPEC.file_name}").install
+end
