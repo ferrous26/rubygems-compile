@@ -2,8 +2,7 @@ Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
   s.version = '1.0.0'
 
-
-  s.summary       = 'A rubygems post-install hook using the MacRuby compiler to compile gems'
+  s.summary       = 'A set of rubygems commands that interface with the MacRuby compiler'
   s.description   = <<-EOS
 A rubygems post-install hook to compile gems using the MacRuby compiler.
   EOS
@@ -14,8 +13,9 @@ A rubygems post-install hook to compile gems using the MacRuby compiler.
 Please uninstall previous versions of this gem, or else
 rubygems will try to load each version of the gem.
 
-The functionality of this gem has changed since the 0.0.x
-series. It now operates as its own command, see the README.
+This version of rubygems-compile requires MacRuby 0.11 or
+newer; the functionality has changed significantly since
+pre-1.0 releases, see the README.
 
 https://github.com/ferrous26/rubygems-compile
 
