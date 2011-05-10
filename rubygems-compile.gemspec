@@ -35,5 +35,5 @@ https://github.com/ferrous26/rubygems-compile
   s.test_files       = Dir.glob('test/**/test_*.rb') + ['test/helper.rb']
   s.extra_rdoc_files = [ 'Rakefile', 'LICENSE.txt', 'README.rdoc' ]
 
-  s.add_development_dependency 'minitest-macruby-pride', ['>= 2.1.2']
+  s.add_development_dependency 'minitest-macruby-pride', ['>= 2.2.0']
 end
