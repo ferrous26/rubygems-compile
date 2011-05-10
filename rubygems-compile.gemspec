@@ -2,8 +2,6 @@ Gem::Specification.new do |s|
   s.name    = 'rubygems-compile'
   s.version = '1.0.0'
 
-  s.required_rubygems_version = Gem::Requirement.new '>= 1.4.2'
-  s.rubygems_version          = Gem::VERSION
 
   s.summary       = 'A rubygems post-install hook using the MacRuby compiler to compile gems'
   s.description   = <<-EOS
@@ -28,8 +26,6 @@ https://github.com/ferrous26/rubygems-compile
   s.email         = 'mrada@marketcircle.com'
   s.homepage      = 'http://github.com/ferrous26/rubygems-compile'
   s.licenses      = ['MIT']
-  s.has_rdoc      = true
-  s.require_paths = ['lib']
 
   s.files            = Dir.glob('lib/**/*.rb')
   s.test_files       = Dir.glob('test/**/test_*.rb') + ['test/helper.rb']
