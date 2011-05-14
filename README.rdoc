@@ -11,23 +11,17 @@ And then you're off to the races!
 
 == Commands
 
-[+compile+] Can be used to compile, or re-compile, any gems that are
-  already installed.
+[+compile+] Can be used to compile, or re-compile, any gems that are  already installed.
+Options:
+  sudo macgem compile --all  # Compile all installed gems
+  sudo macgem compile rspec --no-ignore-dependencies  # Also compile dependencies
 
-  * Options
-    1. +--all+ Compile all installed gems
-    2. +--[no-]ignore-dependencies+ Same meaning as with the install command
+[+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files if a gem does not work well when compiled.
+Options:
+  sudo macgem uncompile --all  # Uncompile all installed gems
+  sudo macgem uncompile rspec --no-ignore-dependencies  # Also uncompile dependencies
 
-[+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files
-  if a gem does not work well when compiled.
-
-  * Options
-    1. +--all+ Uncompile all installed gems
-    2. +--[no-]ignore-dependencies+ Same meaning as with the install command
-
-[+autocompile+] Can be used to enable a post-install hook that will
-  automatically compile gems when you install them. Call it once to
-  turn on, call it a second time to disable it.
+[+autocompile+] Can be used to enable a post-install hook that will automatically compile gems when you install them. Call it once to turn on, call it a second time to disable it.
 
 == Caveats
 
