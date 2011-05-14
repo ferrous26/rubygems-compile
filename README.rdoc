@@ -5,23 +5,25 @@ MacRuby compiler.
 
 All you need to do is:
 
-     macgem install rubygems-compile
+  sudo macgem install rubygems-compile
 
 And then you're off to the races!
 
 == Commands
 
 [+compile+] Can be used to compile, or re-compile, any gems that are  already installed.
-Options:
+
+  sudo macgem compile nokogiri  # Compile gems based on names you provide
   sudo macgem compile --all  # Compile all installed gems
   sudo macgem compile rspec --no-ignore-dependencies  # Also compile dependencies
 
 [+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files if a gem does not work well when compiled.
-Options:
-  sudo macgem uncompile --all  # Uncompile all installed gems
+
+  sudo macgem uncompile nokogiri  # Uncompile gems based on names you provide
+ sudo macgem uncompile --all  # Uncompile all installed gems
   sudo macgem uncompile rspec --no-ignore-dependencies  # Also uncompile dependencies
 
-[+autocompile+] Can be used to enable a post-install hook that will automatically compile gems when you install them. Call it once to turn on, call it a second time to disable it.
+[+auto_compile+] Can be used to enable a post-install hook that will automatically compile gems when you install them. Call it once to turn on, call it a second time to disable it.
 
 == Caveats
 
@@ -42,6 +44,7 @@ Options:
 
 == TODO
 
+* Support specifying a version for compile/uncompile commands
 * Code parsing to WARN about gems that will not work when compiled
 * Parallel compilation to speed up compilation of large gems
   * This might require changes in the MacRuby compiler
