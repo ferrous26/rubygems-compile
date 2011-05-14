@@ -2,7 +2,7 @@ require 'rake/testtask'
 require 'rake/gempackagetask'
 require 'rubygems/dependency_installer'
 
-task :default => :build
+task :default => :gem
 
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
