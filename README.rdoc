@@ -14,6 +14,10 @@ And then you're off to the races!
 [+compile+] Can be used to compile, or re-compile, any gems that are
   already installed.
 
+  * Options
+    1. +--all+ Compile all installed gems
+    2. +--[no-]ignore-dependencies+ Same meaning as with the install command
+
 [+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files
   if a gem does not work well when compiled.
 
