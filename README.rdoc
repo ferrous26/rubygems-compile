@@ -21,8 +21,13 @@ And then you're off to the races!
 [+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files
   if a gem does not work well when compiled.
 
+  * Options
+    1. +--all+ Uncompile all installed gems
+    2. +--[no-]ignore-dependencies+ Same meaning as with the install command
+
 [+autocompile+] Can be used to enable a post-install hook that will
-  automattically compile gems when you install them.
+  automatically compile gems when you install them. Call it once to
+  turn on, call it a second time to disable it.
 
 == Caveats
 
