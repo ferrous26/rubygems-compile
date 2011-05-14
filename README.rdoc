@@ -12,20 +12,20 @@ And then you're off to the races!
 == Commands
 
 [+compile+] Can be used to compile, or re-compile, any gems that are
-already installed.
+  already installed.
 
-[+uncompile+] Can be used to remove the compiled +.rbo+ files if a gem
-does not work well when compiled.
+[+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files
+  if a gem does not work well when compiled.
 
 [+autocompile+] Can be used to enable a post-install hook that will
-automattically compile gems when you install them.
+  automattically compile gems when you install them.
 
 == Caveats
 
 * Large gems will take a long time to compile, but these are the gems
-that will benefit the most from being compiled so please be patient
+  that will benefit the most from being compiled so please be patient
 * This has only been tested on a few gems, but should not break
-existing gems since we leave the original files around
+  existing gems since we leave the original files around
 * As of MacRuby 0.11, you cannot get usable backtrace data for
   compiled ruby files
 * .rbo files take up more disk space than their .rb equivalents
