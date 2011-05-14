@@ -13,6 +13,7 @@ else
     load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
   end
 
+  require 'rubygems-compile/simple_dep_list'
   require 'rubygems-compile/compiler'
   require 'rubygems-compile/commands'
   require 'rubygems-compile/post_install_hook'
