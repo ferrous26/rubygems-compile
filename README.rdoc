@@ -13,17 +13,20 @@ And then you're off to the races!
 
 [+compile+] Can be used to compile, or re-compile, any gems that are  already installed.
 
-  sudo macgem compile nokogiri  # Compile gems based on names you provide
-  sudo macgem compile --all  # Compile all installed gems
+  sudo macgem compile nokogiri                        # Compile gems based on names you provide
+  sudo macgem compile --all                           # Compile all installed gems
   sudo macgem compile rspec --no-ignore-dependencies  # Also compile dependencies
 
 [+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files if a gem does not work well when compiled.
 
-  sudo macgem uncompile nokogiri  # Uncompile gems based on names you provide
- sudo macgem uncompile --all  # Uncompile all installed gems
+  sudo macgem uncompile nokogiri                        # Uncompile gems based on names you provide
+  sudo macgem uncompile --all                           # Uncompile all installed gems
   sudo macgem uncompile rspec --no-ignore-dependencies  # Also uncompile dependencies
 
 [+auto_compile+] Can be used to enable a post-install hook that will automatically compile gems when you install them. Call it once to turn on, call it a second time to disable it.
+
+  sudo macgem auto_compile  # gems will compiled when you install them
+  sudo macgem auto_compile  # gems will not be compiled when you install them
 
 == Caveats
 
@@ -31,21 +34,20 @@ And then you're off to the races!
   that will benefit the most from being compiled so please be patient
 * This has only been tested on a few gems, but should not break
   existing gems since we leave the original files around
-* As of MacRuby 0.11, you cannot get usable backtrace data for
-  compiled ruby files
-* .rbo files take up more disk space than their .rb equivalents
+* At the moment, compiled gems will not provide usable backtraces
+* <tt>.rbo</tt> files take up more disk space than their <tt>.rb</tt> equivalents
 
-== Known Reasons A Compiled Gem Will Not Work
+== Known Issues
 
-* Using non-standard file suffixes (e.g. <tt>mime-types</tt> has a <tt>.rb.data</tt> file)
-  * This might be addressable in a later release
-* Gems that explicitly require a file with the file suffix (e.g. <tt>require 'nokogiri.rb'</tt>)
-  * This might be addressable in a future release
+* Source files using a non-standard suffix (e.g. <tt>mime-types</tt> has a <tt>.rb.data</tt> file) will not get compiled
+  * This might be addressable in a later release, but is not a big deal
+* Gems that explicitly require a file with the file suffix (e.g. <tt>require 'nokogiri.rb'</tt>) will never load the compiled version of the file
+  * Those gems should be updated so that compiled code can be loaded
 
 == TODO
 
 * Support specifying a version for compile/uncompile commands
-* Code parsing to WARN about gems that will not work when compiled
+* Code parsing to WARN about gems that will have issues when compiled
 * Parallel compilation to speed up compilation of large gems
   * This might require changes in the MacRuby compiler
 
