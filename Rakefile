@@ -5,9 +5,10 @@ require 'rubygems/dependency_installer'
 task :default => :gem
 
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+  test.libs     << 'lib' << 'test'
+  test.pattern   = 'test/**/test_*.rb'
+  test.verbose   = true
+  test.ruby_opts = ['-rhelper']
 end
 
 eval IO.read('rubygems-compile.gemspec')
