@@ -1,15 +1,8 @@
-require 'rubygems'
-require 'rake/compiletask'
 require 'rake/testtask'
 require 'rake/gempackagetask'
 require 'rubygems/dependency_installer'
 
 task :default => :build
-
-Rake::CompileTask.new do |t|
-  t.files = FileList['lib/**/*.rb']
-  t.verbose = true
-end
 
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
