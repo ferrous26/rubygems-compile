@@ -14,7 +14,7 @@ else
     load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
   end
 
-  require 'rubygems-compile/simple_dep_list'
+  require 'rubygems-compile/common_methods'
   require 'rubygems-compile/compiler'
   require 'rubygems-compile/uncompiler'
   require 'rubygems-compile/commands'
