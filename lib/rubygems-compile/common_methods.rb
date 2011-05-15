@@ -4,7 +4,7 @@ module Gem
 
     def execution_list
       gems_list.map do |gem|
-        candidates = Gem.source_index.find_name(gem)
+        candidates = Gem.source_index.find_name(gem, options[:version])
 
         if candidates.empty?
           alert_error "#{gem} is not installed. Skipping."
@@ -28,7 +28,7 @@ module Gem
     def dependencies_for *specs
       specs.map { |spec|
         spec.runtime_dependencies.map { |dep|
-          deps = Gem.source_index.find_name(dep.name)
+          deps = Gem.source_index.find_name(dep.name,dep.requirement)
           deps + dependencies_for(*deps)
         }
       }
