@@ -15,9 +15,9 @@ rubygems will try to load each version of the gem.
 
 This version of rubygems-compile requires MacRuby 0.11 or
 newer; the functionality has changed significantly since
-pre-1.0 releases, see the README.
+pre-1.0 releases, see the README:
 
-https://github.com/ferrous26/rubygems-compile
+    https://github.com/ferrous26/rubygems-compile
 
 ***********************************************************
 
