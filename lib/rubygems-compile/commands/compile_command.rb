@@ -5,7 +5,7 @@ require 'rubygems/dependency_list'
 
 class Gem::Commands::CompileCommand < Gem::Command
   include Gem::VersionOption
-  include Gem::SimpleDepList
+  include Gem::CompileMethods
 
   def initialize
     super 'compile', 'Compile (or recompile) installed gems',
@@ -37,32 +37,14 @@ class Gem::Commands::CompileCommand < Gem::Command
   # object for each of them.
 
   def execute
-    installed_gems = Gem.source_index.all_gems
+    gems = gem_list
 
-    gem_names = if options[:all] then
-                  installed_gems.map { |_, spec| spec.name } - ['rubygems-compile']
-                else
-                  get_all_gem_names
-                end
-
-    gems_to_compile = gem_names.map do |gem|
-      candidates = Gem.source_index.find_name(gem)
-
-      if candidates.empty?
-        alert_error "#{gem} is not installed. Skipping."
-        next
-      end
-
-      candidates << dependencies_for(*candidates) unless options[:ignore]
-      candidates
-    end.flatten.uniq
-
-    if gems_to_compile.count >= 10
+    if gems.count >= 10
       alert 'This could take a while; you might want to take a coffee break'
     end
 
     compiler = Gem::Compiler.new
-    gems_to_compile.each { |gem| compiler.compile(gem) }
+    gems.each { |gem| compiler.compile(gem) }
   end
 
 end

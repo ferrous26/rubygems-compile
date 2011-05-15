@@ -1,6 +1,6 @@
 class Gem::Commands::UncompileCommand < Gem::Command
   include Gem::VersionOption
-  include Gem::SimpleDepList
+  include Gem::CompileMethods
 
   def initialize
     super 'uncompile', 'Uncompile installed gems',
@@ -32,28 +32,8 @@ class Gem::Commands::UncompileCommand < Gem::Command
   # an uncompiler object for each of them.
 
   def execute
-    installed_gems = Gem.source_index.all_gems
-
-    gem_names = if options[:all] then
-                  installed_gems.map { |_, spec| spec.name }
-                else
-                  get_all_gem_names
-                end
-
-    gems_to_uncompile = gem_names.map do |gem|
-      candidates = Gem.source_index.find_name(gem)
-
-      if candidates.empty?
-        alert_error "#{gem} is not installed. Skipping."
-        next
-      end
-
-      candidates << dependencies_for(*candidates) unless options[:ignore]
-      candidates
-    end.flatten.uniq
-
     uncompiler = Gem::Uncompiler.new
-    gems_to_uncompile.each { |gem| uncompiler.uncompile(gem) }
+    gem_list.each { |gem| uncompiler.uncompile(gem) }
   end
 
 end
