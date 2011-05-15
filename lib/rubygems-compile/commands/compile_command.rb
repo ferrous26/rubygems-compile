@@ -4,13 +4,14 @@ require 'rubygems/dependency_list'
 # Use the MacRuby compiler to compile installed gems.
 
 class Gem::Commands::CompileCommand < Gem::Command
-  # include Gem::VersionOption
+  include Gem::VersionOption
+  include Gem::SimpleDepList
 
   def initialize
-    super 'compile', 'Compile (or recompile) an installed gem',
+    super 'compile', 'Compile (or recompile) installed gems',
           ignore: true, all: false
 
-    # add_version_option
+    add_version_option
     add_option(
                '-a', '--all', 'Compile all installed gem'
                ) do |all,opts| opts[:all] = all end
