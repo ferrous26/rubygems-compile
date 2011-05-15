@@ -33,7 +33,7 @@ class Gem::Commands::UncompileCommand < Gem::Command
 
   def execute
     uncompiler = Gem::Uncompiler.new
-    gems_list.each { |gem| uncompiler.uncompile(gem) }
+    execution_list.each { |gem| uncompiler.uncompile(gem) }
   end
 
 end

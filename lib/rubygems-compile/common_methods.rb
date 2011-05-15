@@ -2,16 +2,8 @@ module Gem
 
   module CompileMethods
 
-    def gems_list
-      installed_gems = Gem.source_index.all_gems
-
-      gem_names = if options[:all] then
-                    installed_gems.map { |_, spec| spec.name }
-                  else
-                    get_all_gem_names
-                  end
-
-      gem_names.map do |gem|
+    def execution_list
+      gems_list.map do |gem|
         candidates = Gem.source_index.find_name(gem)
 
         if candidates.empty?
@@ -22,6 +14,15 @@ module Gem
         candidates << dependencies_for(*candidates) unless options[:ignore]
         candidates
       end.flatten.uniq
+    end
+
+    def gems_list
+      installed_gems = Gem.source_index.all_gems
+      if options[:all] then
+        installed_gems.map { |_, spec| spec.name }
+      else
+        get_all_gem_names
+      end
     end
 
     def dependencies_for *specs
