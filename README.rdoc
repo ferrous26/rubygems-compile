@@ -14,12 +14,14 @@ And then you're off to the races!
 [+compile+] Can be used to compile, or re-compile, any gems that are  already installed.
 
   sudo macgem compile nokogiri                        # Compile gems based on names you provide
+  sudo macgem compile minitest --version 2.0.2        # Compile a specific version of a gem
   sudo macgem compile --all                           # Compile all installed gems
   sudo macgem compile rspec --no-ignore-dependencies  # Also compile dependencies
 
 [+uncompile+] Can be used to remove the compiled <tt>.rbo</tt> files if a gem does not work well when compiled.
 
   sudo macgem uncompile nokogiri                        # Uncompile gems based on names you provide
+  sudo macgem uncompile minitest --version 2.0.2        # Compile a specific version of a gem
   sudo macgem uncompile --all                           # Uncompile all installed gems
   sudo macgem uncompile rspec --no-ignore-dependencies  # Also uncompile dependencies
 
