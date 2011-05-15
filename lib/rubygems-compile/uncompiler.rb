@@ -2,8 +2,7 @@ class Gem::Uncompiler
   include Gem::UserInteraction
 
   def initialize
-    @current_directory = []
-    @config            = Gem.configuration
+    @config = Gem.configuration
   end
 
   def uncompile gem
@@ -12,9 +11,9 @@ class Gem::Uncompiler
     say uncompilation_message if @config.verbose
 
     gem_files.each do |file|
-      say uncompile_file_msg(file) if @config.really_verbose
+      say "\tAsploded #{file}" if @config.really_verbose
       absolute_file_path = File.join(@spec.full_gem_path, file)
-      FileUtils.rm file
+      FileUtils.rm absolute_file_path
     end
   end
 
@@ -24,22 +23,9 @@ class Gem::Uncompiler
   end
 
   def gem_files
-    @spec.files.select { |file| File.extname(file) == '.rbo' }
-  end
-
-  def uncompile_file_msg file
-    name = File.basename(file)
-    dirs = file.chomp(name).split(File::SEPARATOR)
-    tabs = "\t" * dirs.count
-
-    dirs.each_with_index do |dir, index|
-      unless @current_directory[index] == dir
-        @current_directory[index] = dir
-        say( "\t" * (index + 1) + dir + File::SEPARATOR)
-      end
+    Dir.glob(File.join(@spec.full_gem_path, '**','*.rbo')).map do |file|
+      file.sub /#{@spec.full_gem_path}\//, ''
     end
-
-    "Removing #{tabs}#{name}"
   end
 
 end
