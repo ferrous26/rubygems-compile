@@ -37,7 +37,7 @@ class Gem::Commands::CompileCommand < Gem::Command
   # object for each of them.
 
   def execute
-    gems = gem_list
+    gems = gems_list
 
     if gems.count >= 10
       alert 'This could take a while; you might want to take a coffee break'
