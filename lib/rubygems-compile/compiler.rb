@@ -29,9 +29,18 @@ class Gem::Compiler
     "Compiling #{@spec.full_name}#{slash}"
   end
 
-  # @todo get better at deciding which files to compile;
-  #       right now we ignore the .rb.data file in the mime-types gem
-  #       and probably some other silly edge cases that are similar
+  ##
+  # --
+  # TODO Get better at deciding which files to compile; right now we
+  #      ignore the .rb.data file in the mime-types gem and probably
+  #      some other silly edge cases that are similar.
+  # ++
+  #
+  # We want to find all the files in a gem to compile, but avoid compiling
+  # test files and other misc. files which are usually found in the top
+  # level or test directory.
+  #
+
   def gem_files
     files = @spec.files - @spec.test_files - @spec.extra_rdoc_files
     files.reject { |file| file.match /^(?:test|spec)/ }
