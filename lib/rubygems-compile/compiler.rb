@@ -9,11 +9,6 @@ class Gem::Compiler
   def call gem
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
-    if @spec.name == 'rubygems-compile'
-      alert 'You cannot compile rubygems-compile'
-      return
-    end
-
     say compilation_message if @config.verbose
 
     gem_files.each do |file|
