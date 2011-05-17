@@ -48,7 +48,6 @@ And then you're off to the races!
 
 == TODO
 
-* Support specifying a version for compile/uncompile commands
 * Code parsing to WARN about gems that will have issues when compiled
 * Parallel compilation to speed up compilation of large gems
   * This might require changes in the MacRuby compiler
