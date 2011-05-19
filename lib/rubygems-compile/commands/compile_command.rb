@@ -38,6 +38,7 @@ class Gem::Commands::CompileCommand < Gem::Command
 
   def execute
     gems = execution_list
+    gems.delete_if { |spec| spec.name == 'rubygems-compile' }
 
     if gems.count >= 10
       alert 'This could take a while; you might want to take a coffee break'
