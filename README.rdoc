@@ -1,11 +1,11 @@
 = rubygems-compile
 
 A set of rubygems commands for <tt>macgem</tt> that interface with the
-MacRuby compiler.
+MacRuby compiler. This gem requires MacRuby 0.11 or newer.
 
 All you need to do is:
 
-  sudo macgem install rubygems-compile
+  sudo macgem install rubygems-compile --pre
 
 And then you're off to the races!
 
