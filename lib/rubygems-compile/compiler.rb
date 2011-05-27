@@ -19,11 +19,11 @@ class Gem::Compiler
     gem_files.each do |file|
       say compile_file_msg(file) if @config.really_verbose
       absolute_file_path = File.join(@spec.full_gem_path, file)
-      ::Compiler.new(
-                     bundle: true,
-                      files: [absolute_file_path],
-                     output: "#{absolute_file_path}o"
-                     ).run
+      MacRuby::Compiler.new(
+                            bundle: true,
+                            output: "#{absolute_file_path}o"
+                             files: [absolute_file_path],
+                            ).run
     end
   end
 

@@ -10,7 +10,7 @@ else
   require 'fileutils'
   require 'rubygems/version_option'
 
-  unless Kernel.const_defined?(:Compiler)
+  unless MacRuby.const_defined?(:Compiler)
     load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
   end
 
