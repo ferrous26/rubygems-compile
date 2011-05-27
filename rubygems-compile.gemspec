@@ -5,7 +5,7 @@ GEM_SPEC = Gem::Specification.new do |s|
 
   s.summary       = 'A set of rubygems commands that interface with the MacRuby compiler'
   s.description   = <<-EOS
-A set of rubygems commands that interface with the MacRuby compiler
+A set of rubygems commands that interface with the MacRuby compiler.
   EOS
   s.post_install_message = <<-EOS
 
