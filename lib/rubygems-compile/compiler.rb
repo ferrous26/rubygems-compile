@@ -21,8 +21,8 @@ class Gem::Compiler
       absolute_file_path = File.join(@spec.full_gem_path, file)
       MacRuby::Compiler.new(
                             bundle: true,
-                            output: "#{absolute_file_path}o"
-                             files: [absolute_file_path],
+                            output: "#{absolute_file_path}o",
+                             files: [absolute_file_path]
                             ).run
     end
   end
