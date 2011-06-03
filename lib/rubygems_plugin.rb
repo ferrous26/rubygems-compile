@@ -1,4 +1,4 @@
-if RUBY_VERSION.to_f < 0.11
+unless MACRUBY_REVISION.match /^git commit/
 
   ui = Gem::UserInteraction.new
   ui.alert_warning 'rubygems-compile requires MacRuby 0.11 or newer'
