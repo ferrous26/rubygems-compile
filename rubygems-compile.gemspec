@@ -30,7 +30,7 @@ pre-1.0 releases, see the README:
 
   s.files            = Dir.glob('lib/**/*.rb')
   s.test_files       = Dir.glob('test/**/*') + ['Rakefile', '.gemtest']
-  s.extra_rdoc_files = ['LICENSE.txt', 'README.rdoc']
+  s.extra_rdoc_files = ['LICENSE.txt', 'README.markdown']
 
   s.add_development_dependency 'minitest-macruby-pride', ['>= 2.2.0']
 end
