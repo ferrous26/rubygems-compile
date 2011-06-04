@@ -37,6 +37,9 @@ And then you're off to the races!
 * This has only been tested on a few gems, but should not break
   existing gems since we leave the original files around
 * At the moment, compiled gems will not provide usable backtraces
+  * If you suspect a bug in the way MacRuby compiled a file, try
+    running with pre-compiled files disabled like so:
+    <tt>VM_DISABLE_RBO=1 ruby my_code.rb</tt>
 * <tt>.rbo</tt> files take up more disk space than their <tt>.rb</tt> equivalents
 
 == Known Issues
