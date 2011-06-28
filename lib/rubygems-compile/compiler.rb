@@ -47,7 +47,7 @@ class Gem::Compiler
   #
 
   def gem_files
-    @spec.lib_files
+    @spec.lib_files.select { |file| File.extname(file) == '.rb' }
     # files = @spec.files - @spec.test_files - @spec.extra_rdoc_files
     # files.reject { |file| file.match /^(?:test|spec)/ }
     #   .select { |file| file.match /\.rb$/ }
