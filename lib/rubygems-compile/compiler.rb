@@ -47,9 +47,10 @@ class Gem::Compiler
   #
 
   def gem_files
-    files = @spec.files - @spec.test_files - @spec.extra_rdoc_files
-    files.reject { |file| file.match /^(?:test|spec)/ }
-      .select { |file| file.match /\.rb$/ }
+    @spec.lib_files
+    # files = @spec.files - @spec.test_files - @spec.extra_rdoc_files
+    # files.reject { |file| file.match /^(?:test|spec)/ }
+    #   .select { |file| file.match /\.rb$/ }
   end
 
   def compile_file_msg file
