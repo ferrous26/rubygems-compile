@@ -1,7 +1,7 @@
 GEM_SPEC = Gem::Specification.new do |s|
   s.name     = 'rubygems-compile'
-  s.version  = '1.0.1'
-  s.platform = Gem::Platform::MACRUBY
+  s.version  = '1.0.0rc1'
+#  s.platform = Gem::Platform::MACRUBY
 
   s.summary       = 'A set of rubygems commands that interface with the MacRuby compiler'
   s.description   = <<-EOS
