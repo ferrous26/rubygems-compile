@@ -3,9 +3,9 @@ Gem::Specification.new do |s|
   s.version  = '1.0.0rc2'
 #  s.platform = Gem::Platform::MACRUBY
 
-  s.summary       = 'A set of rubygems commands that interface with the MacRuby compiler'
+  s.summary       = 'A trio of rubygems commands that interface with the MacRuby compiler'
   s.description   = <<-EOS
-A set of rubygems commands that interface with the MacRuby compiler.
+A trio of rubygems commands that interface with the MacRuby compiler.
   EOS
   s.post_install_message = <<-EOS
 
