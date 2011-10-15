@@ -17,10 +17,9 @@ class Gem::Compiler
     say compilation_message if @config.verbose
 
     gem_files.each do |file|
-      next if unsafe?(file)
-
       say compile_file_msg(file) if @config.really_verbose
       absolute_file_path = File.join(@spec.full_gem_path, file)
+      next if unsafe?(absolute_file_path)
       MacRuby::Compiler.new(
                             bundle: true,
                             output: "#{absolute_file_path}o",
@@ -37,7 +36,9 @@ class Gem::Compiler
   def unsafe? file
     Gem::Analyzer.new(File.read(file)).parse
     false
-  rescue Gem::Analyzer::Warning
+  rescue Gem::Analyzer::Warning => e
+    say "WARNING: #{e.message}"
+    say 'Compilation of this file will be skipped'
     true
   end
 
