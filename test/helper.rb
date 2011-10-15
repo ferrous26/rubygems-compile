@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rubygems/command_manager'
 require 'rubygems_plugin'
 
-gem     'minitest-macruby-pride', '>= 2.2.0'
+gem     'minitest', '>= 2.6.1'
 require 'minitest/autorun'
 require 'minitest/pride'
 
