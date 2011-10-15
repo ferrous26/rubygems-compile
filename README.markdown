@@ -15,7 +15,8 @@ And then you're off to the races!
 
 `compile`
 
-  Can be used to compile, or re-compile, any gems that are  already installed.
+  Can be used to compile, or re-compile, any gems that are already
+  installed.
 
 ```bash
 sudo macgem compile nokogiri                        # Compile gems based on names you provide
@@ -26,7 +27,11 @@ sudo macgem compile rspec --no-ignore-dependencies  # Also compile dependencies
 
 `uncompile`
 
-  Can be used to remove the compiled `.rbo` files if a gem does not work well when compiled.
+  Can be used to remove the compiled `.rbo` files if a gem does not
+  work well when compiled. If you find a gem that does not work when
+  compiled, it would be greatly appreciated if you reported it here or
+  to the MacRuby project itself so that someone can look into the
+  problem.
 
 ```bash
 sudo macgem uncompile nokogiri                        # Uncompile gems based on names you provide
@@ -35,9 +40,13 @@ sudo macgem uncompile --all                           # Uncompile all installed 
 sudo macgem uncompile rspec --no-ignore-dependencies  # Also uncompile dependencies
 ```
 
-`auto\_compile`
+`auto_compile`
 
-  Can be used to enable a post-install hook that will automatically compile gems when you install them. Call it once to turn on, call it a second time to disable it.
+  If you don't like the idea of calling `compile` each time you
+  install a gem, then you can use `auto_compile` to enable a
+  post-install hook that will automatically compile gems when they are
+  installed. You can call `auto_compile` a second time to turn off the
+  feature.
 
 ```bash
 sudo macgem auto_compile  # gems will compiled when you install them
@@ -51,7 +60,7 @@ sudo macgem auto_compile  # gems will not be compiled when you install them
 * This has only been tested on a few gems, but should not break
   existing gems since we leave the original files around
 * At the moment, compiled gems will not provide usable backtraces
-  + If you suspect a bug in the way MacRuby compiled a file, try running with pre-compiled files disabled like so: `VM_DISABLE_RBO=1 ruby my_code.rb`
+  + If you suspect a bug in the way MacRuby compiled a file, try running with pre-compiled files disabled like so: `VM_DISABLE_RBO=1 macruby my_code.rb`
 * `.rbo` files take up more disk space than their `.rb` equivalents
 
 ## Known Issues
@@ -59,7 +68,8 @@ sudo macgem auto_compile  # gems will not be compiled when you install them
 * Source files using a non-standard suffix (e.g. `mime-types` has a `.rb.data` file) will not get compiled
   + This might be addressable in a later release, but is not a big deal
 * Gems that explicitly require a file with the file suffix (e.g. `require 'nokogiri.rb'`) will never load the compiled version of the file
-  + Those gems should be updated so that compiled code can be loaded
+  + This issue may be addressed in MacRuby itself in the near future
+  + Alternatively, those gems should be updated so that compiled code can be loaded
 
 ## TODO
 
