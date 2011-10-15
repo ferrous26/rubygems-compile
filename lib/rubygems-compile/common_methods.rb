@@ -17,6 +17,7 @@ module Gem
     end
 
     def gems_list
+      # @todo Gem.source_index is going away...
       installed_gems = Gem.source_index.all_gems
       if options[:all] then
         installed_gems.map { |_, spec| spec.name }
