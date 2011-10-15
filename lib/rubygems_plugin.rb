@@ -15,6 +15,7 @@ else
   end
 
   require 'rubygems-compile/common_methods'
+  require 'rubygems-compile/analyzer'
   require 'rubygems-compile/compiler'
   require 'rubygems-compile/uncompiler'
   require 'rubygems-compile/commands'

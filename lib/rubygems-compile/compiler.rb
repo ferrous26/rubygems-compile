@@ -17,6 +17,8 @@ class Gem::Compiler
     say compilation_message if @config.verbose
 
     gem_files.each do |file|
+      next if unsafe?(file)
+
       say compile_file_msg(file) if @config.really_verbose
       absolute_file_path = File.join(@spec.full_gem_path, file)
       MacRuby::Compiler.new(
@@ -26,8 +28,18 @@ class Gem::Compiler
                             ).run
     end
   end
-
   alias_method :compile, :call
+
+  ##
+  # Uses the GemAnalyzer class to determine if a given file might have
+  # any potential issues when compiled.
+
+  def unsafe? file
+    Gem::Analyzer.new(File.read(file)).parse
+    false
+  rescue Gem::Analyzer::Warning
+    true
+  end
 
   def compilation_message
     slash = @config.really_verbose ? '/' : ''
