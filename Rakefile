@@ -1,24 +1,21 @@
-require 'rake/testtask'
-require 'rake/gempackagetask'
-require 'rubygems/dependency_installer'
-
 task :default => :gem
 
-Rake::TestTask.new(:test) do |test|
-  test.libs     << 'lib' << 'test'
+require 'rake/testtask'
+Rake::TestTask.new do |test|
+  test.libs     << 'test'
   test.pattern   = 'test/**/test_*.rb'
   test.verbose   = true
   test.ruby_opts = ['-rhelper']
 end
 
-eval IO.read('rubygems-compile.gemspec')
+require 'rubygems'
+spec = Gem::Specification.load('rubygems-compile.gemspec')
 
-Rake::GemPackageTask.new(GEM_SPEC) do |pkg|
-  pkg.need_zip = false
-  pkg.need_tar = true
-end
+require 'rake/gempackagetask'
+Rake::GemPackageTask.new(spec) { }
 
+require 'rubygems/dependency_installer'
 desc 'Build the gem and install it'
 task :install => :gem do
-  Gem::Installer.new("pkg/#{GEM_SPEC.file_name}").install
+  Gem::Installer.new("pkg/#{spec.file_name}").install
 end
