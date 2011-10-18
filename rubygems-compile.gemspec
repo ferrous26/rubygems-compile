@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = 'rubygems-compile'
-  s.version  = '1.0.0rc3'
+  s.version  = '1.0.0'
 #  s.platform = Gem::Platform::MACRUBY
 
   s.summary       = 'A trio of rubygems commands that interface with the MacRuby compiler'
