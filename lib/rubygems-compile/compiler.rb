@@ -16,11 +16,11 @@ class Gem::Compiler
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
     if @spec.name == 'rubygems-compile'
-      alert_info 'You cannot compile rubygems-compile' if @config.really_verbose
+      alert_info 'You cannot compile rubygems-compile' if really_verbose
       return
     end
 
-    say compilation_message if @config.verbose
+    say compilation_message if verbose
 
     gem_files.each do |file|
       message            = compile_file_msg(file)
@@ -34,7 +34,7 @@ class Gem::Compiler
                                files: [absolute_file_path]
                               ).run
       end
-      say message if @config.really_verbose
+      say message if really_verbose
     end
   end
   alias_method :compile, :call
@@ -51,7 +51,7 @@ class Gem::Compiler
   end
 
   def compilation_message
-    slash = @config.really_verbose ? '/' : ''
+    slash = really_verbose ? '/' : ''
     "Compiling #{@spec.full_name}#{slash}"
   end
 
@@ -82,11 +82,19 @@ class Gem::Compiler
     dirs.each_with_index do |dir, index|
       unless @current_directory[index] == dir
         @current_directory[index] = dir
-        say( "\t" * (index + 1) + dir + File::SEPARATOR)
+        say( "\t" * (index + 1) + dir + File::SEPARATOR) if really_verbose
       end
     end
 
     "#{tabs}#{name} => #{name}o"
+  end
+
+  def verbose
+    @config.verbose
+  end
+
+  def really_verbose
+    @config.really_verbose
   end
 
 end
