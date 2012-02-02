@@ -1,3 +1,6 @@
+require 'rubygems/version_option'
+require 'rubygems-compile/common_methods'
+
 class Gem::Commands::UncompileCommand < Gem::Command
   include Gem::VersionOption
   include Gem::CompileMethods
@@ -32,6 +35,7 @@ class Gem::Commands::UncompileCommand < Gem::Command
   # an uncompiler object for each of them.
 
   def execute
+    require 'rubygems-compile/uncompiler'
     uncompiler = Gem::Uncompiler.new
     execution_list.each { |gem| uncompiler.uncompile(gem) }
   end

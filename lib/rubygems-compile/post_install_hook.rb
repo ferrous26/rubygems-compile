@@ -3,6 +3,7 @@
 # command.
 
 if Gem.configuration[:compile]
+  require 'rubygems-compile/compiler'
   module Gem
     @post_install_hooks << ::Gem::Compiler.new
   end

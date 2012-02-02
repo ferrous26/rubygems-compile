@@ -1,4 +1,7 @@
 require 'rubygems/dependency_list'
+require 'rubygems/version_option'
+require 'rubygems-compile/common_methods'
+
 
 ##
 # Use the MacRuby compiler to compile installed gems.
@@ -44,6 +47,7 @@ class Gem::Commands::CompileCommand < Gem::Command
       alert 'This could take a while; you might want to take a coffee break'
     end
 
+    require 'rubygems-compile/compiler'
     compiler = Gem::Compiler.new
     gems.each { |gem| compiler.compile(gem) }
   end

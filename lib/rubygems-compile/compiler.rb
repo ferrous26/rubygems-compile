@@ -2,6 +2,12 @@ class Gem::Compiler
   include Gem::UserInteraction
 
   def initialize
+    require 'rbconfig'
+    unless MacRuby.const_defined?(:Compiler)
+      load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
+    end
+    require 'rubygems-compile/analyzer'
+
     @current_directory = []
     @config            = Gem.configuration
   end

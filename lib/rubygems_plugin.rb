@@ -6,19 +6,13 @@ unless MACRUBY_REVISION.match /^git commit/
 
 else
 
-  require 'rbconfig'
-  require 'fileutils'
-  require 'rubygems/version_option'
-
-  unless MacRuby.const_defined?(:Compiler)
-    load File.join(RbConfig::CONFIG['bindir'], 'macrubyc')
-  end
-
-  require 'rubygems-compile/common_methods'
-  require 'rubygems-compile/analyzer'
-  require 'rubygems-compile/compiler'
-  require 'rubygems-compile/uncompiler'
-  require 'rubygems-compile/commands'
   require 'rubygems-compile/post_install_hook'
+  require 'rubygems-compile/commands/compile_command'
+  require 'rubygems-compile/commands/uncompile_command'
+  require 'rubygems-compile/commands/autocompile_command'
+
+  Gem::CommandManager.instance.register_command :compile
+  Gem::CommandManager.instance.register_command :uncompile
+  Gem::CommandManager.instance.register_command :auto_compile
 
 end
