@@ -32,5 +32,5 @@ pre-1.0 releases, see the README:
   s.test_files       = Dir.glob('test/**/*') + ['Rakefile', '.gemtest']
   s.extra_rdoc_files = ['LICENSE.txt', 'README.markdown']
 
-  s.add_development_dependency 'minitest', '>= 2.6.1'
+  s.add_development_dependency 'minitest', '~> 2.11'
 end
