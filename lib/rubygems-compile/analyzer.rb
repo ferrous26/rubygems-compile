@@ -16,7 +16,7 @@ class Gem::Analyzer < Ripper::SexpBuilder
   def on_kw token
     # Related to MacRuby ticket #721
     if token == '__FILE__'
-      raise Warning, 'The __FILE__ keyword is used in this file'
+      raise Warning, '__FILE__ keyword is used (MacRuby ticket #721)'
     end
   end
 
