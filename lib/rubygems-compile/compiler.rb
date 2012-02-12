@@ -21,7 +21,7 @@ class Gem::Compiler
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
     return if trying_to_compile_self?
-    say compilation_message if verbose
+    say gem_compilation_message if verbose
 
     gem_files.each do |file|
       message            = compile_file_msg(file)
@@ -47,7 +47,7 @@ class Gem::Compiler
     e
   end
 
-  def compilation_message
+  def gem_compilation_message
     slash = really_verbose ? '/' : ''
     "Compiling #{@spec.full_name}#{slash}"
   end
@@ -71,7 +71,7 @@ class Gem::Compiler
     #   .select { |file| file.match /\.rb$/ }
   end
 
-  def compile_file_msg file
+  def compile_file_message file
     name = File.basename(file)
     dirs = file.chomp(name).split(File::SEPARATOR)
     tabs = "\t" * dirs.count
