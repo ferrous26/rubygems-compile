@@ -24,9 +24,9 @@ class Gem::Compiler
     say gem_compilation_message if verbose
 
     gem_files.each do |file|
-      message            = compile_file_msg(file)
-      absolute_file_path = File.join(@spec.full_gem_path, file)
-      if warning = unsafe?(absolute_file_path)
+      message   = compile_file_message(file)
+      full_path = absolute_path(file)
+      if warning = unsafe?(full_path)
         message << "\t\t\tSKIPPED: #{warning.message}"
       else
         MacRuby::Compiler.compile_file(full_path)
@@ -64,11 +64,20 @@ class Gem::Compiler
   # level or test directory.
   #
 
-  def gem_files
-    @spec.lib_files.select { |file| File.extname(file) == '.rb' }
-    # files = @spec.files - @spec.test_files - @spec.extra_rdoc_files
-    # files.reject { |file| file.match /^(?:test|spec)/ }
-    #   .select { |file| file.match /\.rb$/ }
+  if Gem::VERSION.to_f < 1.8
+    def gem_files
+      @spec.lib_files.select { |file| File.extname(file) == '.rb' }
+    end
+    def absolute_path file
+      File.join(@spec.full_gem_path, file)
+    end
+  else
+    def gem_files
+      Dir.glob("#{@spec.lib_dirs_glob}/**/*.rb")
+    end
+    def absolute_path file
+      file
+    end
   end
 
   def compile_file_message file
