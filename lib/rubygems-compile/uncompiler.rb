@@ -1,7 +1,7 @@
 class Gem::Uncompiler
   include Gem::UserInteraction
 
-  def uncompile gem
+  def self.uncompile gem
     @instance ||= Gem::Uncompiler.new
     @instance.uncompile gem
   end
