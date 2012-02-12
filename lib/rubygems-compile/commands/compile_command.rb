@@ -44,7 +44,7 @@ class Gem::Commands::CompileCommand < Gem::Command
     gems.delete_if { |spec| spec.name == 'rubygems-compile' }
 
     if gems.count >= 10
-      alert 'This could take a while; you might want to take a coffee break'
+      alert 'This could take a while...'
     end
 
     require 'rubygems-compile/compiler'
