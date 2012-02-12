@@ -13,8 +13,12 @@ module Gem
 
         candidates << dependencies_for(*candidates) unless options[:ignore]
         candidates
-      end.flatten.uniq
     end
+    gems.flatten!
+    gems.uniq!
+    gems.delete_if { |spec| spec.name == 'rubygems-compile' }
+    gems
+  end
 
     def gems_list
       # @todo Gem.source_index is going away...
