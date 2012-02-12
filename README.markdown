@@ -6,7 +6,7 @@ MacRuby compiler. This gem requires MacRuby 0.11 or newer.
 All you need to do is:
 
 ```bash
-sudo macgem install rubygems-compile --pre
+sudo macgem install rubygems-compile
 ```
 
 And then you're off to the races!
@@ -73,11 +73,10 @@ sudo macgem auto_compile  # gems will not be compiled when you install them
 
 ## TODO
 
-* Code parsing to WARN about gems that will have issues when compiled
 * Parallel compilation to speed up compilation of large gems
   + This might require changes in the MacRuby compiler
 
 ## Copyright
 
-Copyright (c) 2011 Mark Rada. See LICENSE.txt for further details.
+Copyright (c) 2011-2012 Mark Rada. See LICENSE.txt for further details.
 
