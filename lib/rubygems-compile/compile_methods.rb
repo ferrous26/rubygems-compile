@@ -45,7 +45,7 @@ else
 
     specs = get_all_gem_names.map { |gem|
       names = Gem::Specification.find_all_by_name(gem, options[:version])
-      names << dependencies_for specs unless options[:ignore]
+      names << dependencies_for(names) unless options[:ignore]
     }
     specs.flatten!
     specs.uniq!
