@@ -5,6 +5,6 @@
 if Gem.configuration[:compile]
   require 'rubygems-compile/compiler'
   module Gem
-    @post_install_hooks << ::Gem::Compiler.new
+    @post_install_hooks << ::Gem::Compiler
   end
 end

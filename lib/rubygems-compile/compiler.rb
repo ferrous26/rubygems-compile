@@ -1,9 +1,12 @@
 class Gem::Compiler
   include Gem::UserInteraction
 
-  def self.compile gem
-    @instance ||= Gem::Compiler.new
-    @instance.compile gem
+  class << self
+    def compile gem
+      @instance ||= Gem::Compiler.new
+      @instance.compile gem
+    end
+    alias_method :call, :compile
   end
 
   def initialize
@@ -17,7 +20,7 @@ class Gem::Compiler
     @config            = Gem.configuration
   end
 
-  def call gem
+  def compile gem
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
     return if trying_to_compile_self?
@@ -34,7 +37,6 @@ class Gem::Compiler
       say message if really_verbose
     end
   end
-  alias_method :compile, :call
 
   ##
   # Uses the GemAnalyzer class to determine if a given file might have
