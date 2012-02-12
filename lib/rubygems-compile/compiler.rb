@@ -21,7 +21,7 @@ class Gem::Compiler
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
     if @spec.name == 'rubygems-compile'
-      alert_info 'You cannot compile rubygems-compile' if really_verbose
+      alert 'You cannot compile rubygems-compile' if really_verbose
       return
     end
 
