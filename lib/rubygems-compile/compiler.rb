@@ -29,11 +29,7 @@ class Gem::Compiler
       if warning = unsafe?(absolute_file_path)
         message << "\t\t\tSKIPPED: #{warning.message}"
       else
-        MacRuby::Compiler.new(
-                              bundle: true,
-                              output: "#{absolute_file_path}o",
-                               files: [absolute_file_path]
-                              ).run
+        MacRuby::Compiler.compile_file(full_path)
       end
       say message if really_verbose
     end
