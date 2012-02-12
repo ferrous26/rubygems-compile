@@ -28,11 +28,11 @@ class Gem::Compiler
 
     gem_files.each do |file|
       message   = compile_file_message(file)
-      full_path = absolute_path(file)
+      full_path = File.join(@spec.full_gem_path, file)
       if unsafe? full_path
         message << "\t\t\tSKIPPED: #{@parser.warnings.join(', ')}"
       else
-        MacRuby::Compiler.compile_file(full_path)
+        MacRuby::Compiler.compile_file full_path
       end
       say message if really_verbose
     end
@@ -68,15 +68,11 @@ class Gem::Compiler
     def gem_files
       @spec.lib_files.select { |file| File.extname(file) == '.rb' }
     end
-    def absolute_path file
-      File.join(@spec.full_gem_path, file)
-    end
   else
     def gem_files
-      Dir.glob("#{@spec.lib_dirs_glob}/**/*.rb")
-    end
-    def absolute_path file
-      file
+      Dir.glob("#{@spec.lib_dirs_glob}/**/*.rb").map { |file|
+        file.sub(Regexp.new(Regexp.escape(@spec.full_gem_path)), '')
+      }
     end
   end
 
