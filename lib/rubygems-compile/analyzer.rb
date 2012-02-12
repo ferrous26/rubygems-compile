@@ -15,10 +15,10 @@ class Gem::Analyzer < Ripper::SexpBuilder
   # Check the given string of code for potential issues when compiled.
   # Returns the analyzer instance afterwards.
 
-  def check code
+  def self.check code
     @parser ||= Gem::Analyzer.new(code)
-    parser.parse
-    parser
+    @parser.parse
+    @parser
   end
 
   def parse
