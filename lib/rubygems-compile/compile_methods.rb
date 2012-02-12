@@ -33,7 +33,7 @@ if Gem::VERSION.to_f < 1.8
     specs.map { |spec|
       spec.runtime_dependencies.map { |dep|
         deps = Gem.source_index.find_name(dep.name, dep.requirement)
-        deps + dependencies_for(*deps)
+        deps + dependencies_for(deps)
       }
     }
   end
@@ -44,8 +44,9 @@ else
     return all_gemspecs if options[:all]
 
     specs = get_all_gem_names.map { |gem|
-      names = Gem::Specification.find_all_by_name(gem, options[:version])
-      names << dependencies_for(names) unless options[:ignore]
+      gems = Gem::Specification.find_all_by_name(gem, options[:version])
+      gems << dependencies_for(gems) unless options[:ignore]
+      gems
     }
     specs.flatten!
     specs.uniq!
@@ -64,7 +65,7 @@ else
     specs.map { |spec|
       spec.runtime_dependencies.map { |dep|
         deps = Gem::Specification.find_all_by_name(dep.name, dep.requirement)
-        deps + dependencies_for(*deps)
+        deps + dependencies_for(deps)
       }
     }
   end
