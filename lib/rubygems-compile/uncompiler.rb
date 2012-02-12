@@ -7,6 +7,7 @@ class Gem::Uncompiler
   end
 
   def initialize
+    require 'fileutils'
     @config = Gem.configuration
   end
 
