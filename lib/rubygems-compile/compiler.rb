@@ -20,11 +20,7 @@ class Gem::Compiler
   def call gem
     @spec = gem.is_a?(Gem::Specification) ? gem : gem.spec
 
-    if @spec.name == 'rubygems-compile'
-      alert 'You cannot compile rubygems-compile' if really_verbose
-      return
-    end
-
+    return if trying_to_compile_self?
     say compilation_message if verbose
 
     gem_files.each do |file|
@@ -100,6 +96,13 @@ class Gem::Compiler
 
   def really_verbose
     @config.really_verbose
+  end
+
+  def trying_to_compile_self?
+    if @spec.name == 'rubygems-compile'
+      alert 'You cannot compile rubygems-compile' if really_verbose
+      true
+    end
   end
 
 end
