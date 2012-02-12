@@ -58,7 +58,7 @@ else
   private
 
   def all_gemspecs
-    Gem::Specification.map(&:name).select { |name| name != 'rubygems-compile' }
+    Gem::Specification.select { |spec| spec.name != 'rubygems-compile' }
   end
 
   def dependencies_for specs
