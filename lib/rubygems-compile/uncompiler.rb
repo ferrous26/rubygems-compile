@@ -17,9 +17,9 @@ class Gem::Uncompiler
     say uncompilation_message if @config.verbose
 
     gem_files.each do |file|
-      say "\tAsploded #{file}" if @config.really_verbose
       absolute_file_path = File.join(@spec.full_gem_path, file)
       FileUtils.rm absolute_file_path
+      say "\tAsploded #{file}" if @config.really_verbose
     end
   end
 
