@@ -1,6 +1,11 @@
 class Gem::Compiler
   include Gem::UserInteraction
 
+  def self.compile gem
+    @instance ||= Gem::Compiler.new
+    @instance.compile gem
+  end
+
   def initialize
     require 'rbconfig'
     unless MacRuby.const_defined?(:Compiler)

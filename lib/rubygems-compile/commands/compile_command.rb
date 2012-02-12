@@ -48,8 +48,7 @@ class Gem::Commands::CompileCommand < Gem::Command
     end
 
     require 'rubygems-compile/compiler'
-    compiler = Gem::Compiler.new
-    gems.each { |gem| compiler.compile(gem) }
+    gems.each { |gem| Gem::Compiler.compile gem }
   end
 
 end

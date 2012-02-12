@@ -36,8 +36,7 @@ class Gem::Commands::UncompileCommand < Gem::Command
 
   def execute
     require 'rubygems-compile/uncompiler'
-    uncompiler = Gem::Uncompiler.new
-    execution_list.each { |gem| uncompiler.uncompile(gem) }
+    execution_list.each { |gem| Gem::Uncompiler.uncompile(gem) }
   end
 
 end

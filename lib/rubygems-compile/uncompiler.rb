@@ -1,6 +1,11 @@
 class Gem::Uncompiler
   include Gem::UserInteraction
 
+  def uncompile gem
+    @instance ||= Gem::Uncompiler.new
+    @instance.uncompile gem
+  end
+
   def initialize
     @config = Gem.configuration
   end
