@@ -1,6 +1,6 @@
 require 'rubygems/dependency_list'
 require 'rubygems/version_option'
-require 'rubygems-compile/common_methods'
+require 'rubygems-compile/compile_methods'
 
 
 ##

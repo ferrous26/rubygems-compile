@@ -1,5 +1,5 @@
 require 'rubygems/version_option'
-require 'rubygems-compile/common_methods'
+require 'rubygems-compile/compile_methods'
 
 class Gem::Commands::UncompileCommand < Gem::Command
   include Gem::VersionOption
