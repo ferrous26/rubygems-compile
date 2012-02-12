@@ -26,8 +26,8 @@ class Gem::Compiler
     gem_files.each do |file|
       message   = compile_file_message(file)
       full_path = absolute_path(file)
-      if warning = unsafe?(full_path)
-        message << "\t\t\tSKIPPED: #{warning.message}"
+      if unsafe? full_path
+        message << "\t\t\tSKIPPED: #{@parser.warnings.join(', ')}"
       else
         MacRuby::Compiler.compile_file(full_path)
       end
@@ -41,10 +41,8 @@ class Gem::Compiler
   # any potential issues when compiled.
 
   def unsafe? file
-    Gem::Analyzer.new(File.read(file)).parse
-    false
-  rescue Gem::Analyzer::Warning => e
-    e
+    @parser = Gem::Analyzer.check File.read(file)
+    !@parser.warnings.empty?
   end
 
   def gem_compilation_message
