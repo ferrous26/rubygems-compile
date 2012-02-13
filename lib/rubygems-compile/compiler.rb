@@ -32,7 +32,7 @@ class Gem::Compiler
       if safe? full_path
         MacRuby::Compiler.compile_file full_path
       else
-        message << "\t\t\tSKIPPED: #{@analyzer.warnings.join(', ')}"
+        message << "\t\t\tSKIPPED: #{@analyzer.warnings.uniq.join(', ')}"
       end
       say message if really_verbose
     end
