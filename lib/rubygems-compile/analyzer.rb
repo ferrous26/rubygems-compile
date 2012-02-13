@@ -11,16 +11,6 @@ class Gem::Analyzer < Ripper::SexpBuilder
 
   attr_reader :warnings
 
-  ##
-  # Check the given string of code for potential issues when compiled.
-  # Returns the analyzer instance afterwards.
-
-  def self.check code
-    @parser ||= Gem::Analyzer.new(code)
-    @parser.parse
-    @parser
-  end
-
   def parse
     @warnings = []
     super

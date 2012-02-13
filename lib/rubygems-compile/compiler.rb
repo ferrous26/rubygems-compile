@@ -29,10 +29,10 @@ class Gem::Compiler
     gem_files.each do |file|
       message   = compile_file_message(file)
       full_path = File.join(@spec.full_gem_path, file)
-      if unsafe? full_path
-        message << "\t\t\tSKIPPED: #{@parser.warnings.join(', ')}"
-      else
+      if safe? full_path
         MacRuby::Compiler.compile_file full_path
+      else
+        message << "\t\t\tSKIPPED: #{@analyzer.warnings.join(', ')}"
       end
       say message if really_verbose
     end
@@ -42,9 +42,10 @@ class Gem::Compiler
   # Uses the GemAnalyzer class to determine if a given file might have
   # any potential issues when compiled.
 
-  def unsafe? file
-    @parser = Gem::Analyzer.check File.read(file)
-    !@parser.warnings.empty?
+  def safe? file
+    @analyzer = Gem::Analyzer.new File.read(file)
+    @analyzer.parse
+    @analyzer.warnings.empty?
   end
 
   def gem_compilation_message
